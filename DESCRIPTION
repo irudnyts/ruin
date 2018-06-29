@@ -20,4 +20,5 @@ Collate:
     'AllGeneric.R'
     'CramerLundberg.R'
     'CramerLundbergExtended.R'
+    'ruin_probability.R'
 RoxygenNote: 6.0.1

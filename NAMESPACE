@@ -2,4 +2,5 @@
 
 export(CramerLundberg)
 export(CramerLundbergExtended)
+export(ruin_probability)
 export(simulate_path)

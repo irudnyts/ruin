@@ -6,7 +6,7 @@ setClass(Class = "CramerLundbergExtended",
              initial_capital = "numeric",
              premium_rate = "numeric",
              claim_poisson_arrival_rate = "numeric",
-             claim_size_mixing_parameter = "function",
+             claim_size_mixing_parameter = "numeric",
              claim_size_light_tail_distribution = "function",
              claim_size_light_tail_parameters = "list",
              claim_size_heavy_tail_distribution = "function",
@@ -55,11 +55,9 @@ setClass(Class = "PathCramerLundbergExtended",
              claim_arrival_times = "numeric",
              capital_injection_sizes = "numeric",
              capital_injection_arrival_times = "numeric",
-             jumps_numer = "numeric",
              time_horizon = "numeric",
              is_ruined = "logical",
              elapsed_time = "numeric",
-             max_jumps_number = "numeric",
              max_time_horizon = "numeric",
              max_simulation_time = "numeric",
              seed = "integer"
@@ -69,13 +67,18 @@ setMethod(
     f = "simulate_path",
     signature = c(model = "CramerLundbergExtended"),
     definition = function(model,
-                          max_jumps_number = NULL,
                           max_time_horizon = NULL,
                           max_simulation_time = NULL,
                           seed = NULL) {
 
         # set default arguments
         #-----------------------------------------------------------------------
+
+        if(is.null(max_time_horizon))
+            max_time_horizon <- Inf
+
+        if(is.null(max_simulation_time))
+            max_simulation_time <- Inf
 
         if(is.null(seed)) {
             seed <- .Random.seed
@@ -141,78 +144,85 @@ setMethod(
         ca_pos <- rexp(1, lambda_p) # current arrival time of a positive jump
         ca_neg <- rexp(1, lambda_n) # current arrival time of a negative jump
 
-        nj <- 0 # number of jumps
-
         start_time <- Sys.time() # set a timer
 
         is_ruined <- FALSE
 
         repeat{
 
-            if((ca_pos < max_time | ca_neg < max_time) & nj < max_jumps_number) {
+            if(as.numeric(Sys.time() - start_time) < max_simulation_time) {
 
-                if(ca_pos > ca_neg) {
+                if(ca_pos < max_time_horizon || ca_neg < max_time_horizon) {
 
-                    # current negative jump's size
-                    cs_neg <- ifelse(test = rbinom(n = 1, size = 1, prob = eps) == 1,
-                                     yes = do.call(f_n2, param_n2),
-                                     no = do.call(f_n1, param_n1))
+                    if(ca_pos > ca_neg) {
 
-                    path <- add_jump_to_path(path, ca_neg, -cs_neg)
+                        # current negative jump's size
+                        cs_neg <- ifelse(test = rbinom(n = 1, size = 1, prob = eps) == 1,
+                                         yes = do.call(f_n2, param_n2),
+                                         no = do.call(f_n1, param_n1))
 
-                    s_neg <- c(s_neg, cs_neg)
-                    a_neg <- c(a_neg, ca_neg)
+                        path <- add_jump_to_path(path, ca_neg, -cs_neg)
 
-                    nj <- nj + 1
+                        s_neg <- c(s_neg, cs_neg)
+                        a_neg <- c(a_neg, ca_neg)
 
-                    if(path[nrow(path), 2] < 0) {
-                        is_ruined <- TRUE
-                        break
+                        if(path[nrow(path), 2] < 0) {
+                            is_ruined <- TRUE
+                            break
+                        }
+
+                        ca_neg <- ca_neg + rexp(1, lambda_n)
+
+
+                    } else if(ca_pos == ca_neg) {
+
+                        # current positive jump's size
+                        cs_pos <- do.call(f_p, param_p)
+                        # current negative jump's size
+                        cs_neg <- ifelse(test = rbinom(n = 1, size = 1, prob = eps) == 1,
+                                         yes = do.call(f_n2, param_n2),
+                                         no = do.call(f_n1, param_n1))
+
+                        path <- add_jump_to_path(path, ca_pos, cs_pos - cs_neg)
+
+                        s_pos <- c(s_pos, cs_pos)
+                        s_neg <- c(s_neg, cs_neg)
+
+                        a_pos <- c(a_pos, ca_pos)
+                        a_neg <- c(a_neg, ca_neg)
+
+                        if(path[nrow(path), 2] < 0) {
+                            is_ruined <- TRUE
+                            break
+                        }
+
+                        ca_pos <- ca_pos + rexp(1, lambda_p)
+                        ca_neg <- ca_neg + rexp(1, lambda_n)
+
+                    } else if(ca_pos < ca_neg) {
+
+                        # current positive jump's size
+                        cs_pos <- do.call(f_p, param_p)
+
+                        path <- add_jump_to_path(path, ca_pos, cs_pos)
+
+                        s_pos <- c(s_pos, cs_pos)
+                        a_pos <- c(a_pos, ca_pos)
+
+                        ca_pos <- ca_pos + rexp(1, lambda_p)
+
                     }
 
-                    ca_neg <- ca_neg + rexp(1, lambda_n)
+                } else {
 
+                    # add max_time_horizon to a path
+                        path <- rbind(
+                            path,
+                            c(max_time_horizon,
+                              path[nrow(path), 2] + (max_time_horizon - path[nrow(path), 1]) * pr)
+                        )
 
-                } else if(ca_pos == ca_neg) {
-
-                    # current positive jump's size
-                    cs_pos <- do.call(f_p, param_p)
-                    # current negative jump's size
-                    cs_neg <- ifelse(test = rbinom(n = 1, size = 1, prob = eps) == 1,
-                                     yes = do.call(f_n2, param_n2),
-                                     no = do.call(f_n1, param_n1))
-
-                    path <- add_jump_to_path(path, ca_pos, cs_pos - cs_neg)
-
-                    s_pos <- c(s_pos, cs_pos)
-                    s_neg <- c(s_neg, cs_neg)
-
-                    a_pos <- c(a_pos, ca_pos)
-                    a_neg <- c(a_neg, ca_neg)
-
-                    nj <- nj + 1
-
-                    if(path[nrow(path), 2] < 0) {
-                        is_ruined <- TRUE
-                        break
-                    }
-
-                    ca_pos <- ca_pos + rexp(1, lambda_p)
-                    ca_neg <- ca_neg + rexp(1, lambda_n)
-
-                } else if(ca_pos < ca_neg) {
-
-                    # current positive jump's size
-                    cs_pos <- do.call(f_p, param_p)
-
-                    path <- add_jump_to_path(path, ca_pos, cs_pos)
-
-                    s_pos <- c(s_pos, cs_pos)
-                    a_pos <- c(a_pos, ca_pos)
-
-                    nj <- nj + 1
-
-                    ca_pos <- ca_pos + rexp(1, lambda_p)
+                    break
 
                 }
 
@@ -225,14 +235,6 @@ setMethod(
         }
 
 
-        # add max_time to a path, if the path is not ruined
-        if(path[nrow(path), 2] >= 0)
-            path <- rbind(
-                path,
-                c(max_time,
-                  path[nrow(path), 2] + (max_time - path[nrow(path), 1]) * pr)
-            )
-
         # generate a returning value
         process <- new(
             Class = "PathCramerLundbergExtended",
@@ -242,11 +244,9 @@ setMethod(
             claim_arrival_times = a_neg,
             capital_injection_sizes = s_pos,
             capital_injection_arrival_times = a_pos,
-            jumps_numer = nj,
             time_horizon = path[nrow(path), 1],
             is_ruined = is_ruined,
-            # elapsed_time = ,
-            max_jumps_number = max_jumps_number,
+            elapsed_time = as.numeric(Sys.time() - start_time),
             max_time_horizon = max_time_horizon,
             max_simulation_time = max_simulation_time,
             seed = seed
@@ -256,5 +256,3 @@ setMethod(
 
     }
 )
-
-
