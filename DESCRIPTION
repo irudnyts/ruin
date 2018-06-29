@@ -10,7 +10,7 @@ License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Collate: 
-    'generics.R'
+    'AllGeneric.R'
     'CramerLundberg.R'
     'CramerLundbergExtended.R'
 RoxygenNote: 6.0.1

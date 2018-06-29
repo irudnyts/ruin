@@ -1,4 +1,4 @@
-#' @include generics.R
+#' @include AllGeneric.R
 NULL
 
 setClass(Class = "CramerLundbergExtended",
@@ -28,6 +28,9 @@ CramerLundbergExtended <- function(initial_capital = NULL,
                                    capital_injection_poisson_rate = NULL,
                                    capital_injection_distribution = NULL,
                                    capital_injection_parameters = NULL) {
+
+    # validate arguments
+
     model <- new(
         Class = "CramerLundbergExtended",
         initial_capital = initial_capital,
@@ -44,12 +47,34 @@ CramerLundbergExtended <- function(initial_capital = NULL,
     )
 }
 
+setClass(Class = "PathCramerLundbergExtended",
+         slots = list(
+             model = "CramerLundbergExtended",
+             path = "matrix",
+             claim_sizes = "numeric",
+             claim_arrival_times = "numeric",
+             capital_injection_sizes = "numeric",
+             capital_injection_arrival_times = "numeric",
+             jumps_numer = "numeric",
+             end_time = "numeric",
+             is_ruined = "logical",
+             max_jumps_number = "numeric",
+             max_time_horizon = "numeric",
+             max_simulation_time = "numeric",
+             seed = "integer"
+         ))
+
 setMethod(
     f = "simulate_process",
     signature = c(model = "CramerLundbergExtended"),
-    definition = function(model) {
+    definition = function(model,
+                          max_jumps_number = NULL,
+                          max_time_horizon = NULL,
+                          max_simulation_time = NULL,
+                          seed = NULL) {
 
-        browser()
+
+
 
     }
 )
