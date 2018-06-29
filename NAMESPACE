@@ -2,4 +2,4 @@
 
 export(CramerLundberg)
 export(CramerLundbergExtended)
-export(simulate_process)
+export(simulate_path)
