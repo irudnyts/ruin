@@ -144,13 +144,15 @@ setMethod(
         ca_pos <- rexp(1, lambda_p) # current arrival time of a positive jump
         ca_neg <- rexp(1, lambda_n) # current arrival time of a negative jump
 
-        start_time <- Sys.time() # set a timer
-
         is_ruined <- FALSE
+
+        start_time <- Sys.time() # set a timer
 
         repeat{
 
-            if(as.numeric(Sys.time() - start_time) < max_simulation_time) {
+            if(as.numeric(difftime(time1 = Sys.time(),
+                                   time2 = start_time,
+                                   units = "secs")) < max_simulation_time) {
 
                 if(ca_pos < max_time_horizon || ca_neg < max_time_horizon) {
 
@@ -234,6 +236,11 @@ setMethod(
 
         }
 
+        end_time <- Sys.time()
+
+        elapsed_time <- as.numeric(difftime(time1 = end_time,
+                                            time2 = start_time,
+                                            units = "secs"))
 
         # generate a returning value
         process <- new(
@@ -246,7 +253,7 @@ setMethod(
             capital_injection_arrival_times = a_pos,
             time_horizon = path[nrow(path), 1],
             is_ruined = is_ruined,
-            elapsed_time = as.numeric(Sys.time() - start_time),
+            elapsed_time = elapsed_time,
             max_time_horizon = max_time_horizon,
             max_simulation_time = max_simulation_time,
             seed = seed
