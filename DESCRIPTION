@@ -15,10 +15,11 @@ Depends:
     R (>= 3.4.3)
 Imports:
     actuar(>= 2.3.0),
-    pbapply(>= 1.3.4)
+    parallel
 Collate: 
     'AllGeneric.R'
     'CramerLundberg.R'
     'CramerLundbergExtended.R'
     'ruin_probability.R'
+    'zzz.R'
 RoxygenNote: 6.0.1
