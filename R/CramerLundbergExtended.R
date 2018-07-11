@@ -83,7 +83,8 @@ setMethod(
         if(is.null(seed)) {
             seed <- .Random.seed
         } else {
-            .Random.seed <- seed
+            # .Random.seed <<- seed
+            assign(x = ".Random.seed", value = seed, envir = .GlobalEnv)
         }
 
         # validate arguments

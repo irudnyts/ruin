@@ -1,14 +1,18 @@
 #' @export
 ruin_probability <- function(model,
                              time_horizon,
-                             simulation_number = 10000) {
+                             simulation_number = 10000) { # ,
+                             # cluster = NULL) {
+
+    browser()
 
     processes <- pbapply::pbreplicate(
         n = simulation_number,
         expr = do.call(simulate_path,
                        list(model = model,
                             max_time_horizon = time_horizon)),
-        simplify = FALSE
+        simplify = FALSE# ,
+        # cl = cluster
     )
 
     ruined <- sapply(processes, function(prc) prc@is_ruined)
