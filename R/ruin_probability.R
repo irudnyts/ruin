@@ -34,6 +34,11 @@ ruin_probability <- function(model,
 
             parallel::clusterSetRNGStream(cl = cluster)
 
+            # export model variable to cluster workers
+            parallel::clusterExport(cl = cluster,
+                                    varlist = "model",
+                                    envir = environment())
+
             processes <- parallel::parLapply(
                 cl = cluster,
                 X = rep(time_horizon, simulation_number),
@@ -62,9 +67,9 @@ ruin_probability <- function(model,
         # XXX
         # change .Random.seed in Global enviroment
         # should be in loop
-        assign(x = ".Random.seed",
-               value = parallel::nextRNGStream(.Random.seed),
-               envir = .GlobalEnv)
+        # assign(x = ".Random.seed",
+        #        value = parallel::nextRNGStream(.Random.seed),
+        #        envir = .GlobalEnv)
 
 
     } else {
