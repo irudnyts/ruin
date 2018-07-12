@@ -48,6 +48,8 @@ ruin_probability <- function(model,
                 )
             )
 
+            parallel::stopCluster(cl = cluster)
+
         # parallelize for Unix
         } else if(.Platform[["OS.type"]] == "unix") {
 
