@@ -59,6 +59,14 @@ ruin_probability <- function(model,
         }
 
 
+        # XXX
+        # change .Random.seed in Global enviroment
+        # should be in loop
+        assign(x = ".Random.seed",
+               value = parallel::nextRNGStream(.Random.seed),
+               envir = .GlobalEnv)
+
+
     } else {
 
         processes <- replicate(
