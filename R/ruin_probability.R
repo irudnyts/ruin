@@ -28,17 +28,18 @@ ruin_probability <- function(model,
         # parallelize for Windows
         if(.Platform[["OS.type"]] == "windows") {
 
-            # XXX
-
+            # set up a cluster
             cluster <- parallel::makePSOCKcluster(ncores)
 
+            # set a RNG stream
             parallel::clusterSetRNGStream(cl = cluster)
 
-            # export model variable to cluster workers
+            # export "model" variable to cluster workers
             parallel::clusterExport(cl = cluster,
                                     varlist = "model",
                                     envir = environment())
 
+            # run simulate_path simulation_number times
             processes <- parallel::parLapply(
                 cl = cluster,
                 X = rep(time_horizon, simulation_number),
@@ -48,6 +49,7 @@ ruin_probability <- function(model,
                 )
             )
 
+            # stop cluster
             parallel::stopCluster(cl = cluster)
 
         # parallelize for Unix
@@ -65,13 +67,14 @@ ruin_probability <- function(model,
 
         }
 
-
-        # XXX
         # change .Random.seed in Global enviroment
-        # should be in loop
-        # assign(x = ".Random.seed",
-        #        value = parallel::nextRNGStream(.Random.seed),
-        #        envir = .GlobalEnv)
+        seed <- parallel::nextRNGStream(.Random.seed)
+        for(i in seq_len(simulation_number))
+            seed <- parallel::nextRNGStream(seed)
+
+        assign(x = ".Random.seed",
+               value = seed,
+               envir = .GlobalEnv)
 
 
     } else {
