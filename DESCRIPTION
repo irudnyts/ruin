@@ -16,7 +16,7 @@ Depends:
 Imports:
     actuar(>= 2.3.0),
     parallel
-Collate: 
+Collate:
     'AllClass.R'
     'AllGeneric.R'
     'methods-CramerLundberg.R'
@@ -24,3 +24,4 @@ Collate:
     'ruin_probability.R'
     'zzz.R'
 RoxygenNote: 6.0.1
+Suggests: testthat
