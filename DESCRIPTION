@@ -17,9 +17,10 @@ Imports:
     actuar(>= 2.3.0),
     parallel
 Collate: 
+    'AllClass.R'
     'AllGeneric.R'
-    'CramerLundberg.R'
-    'CramerLundbergExtended.R'
+    'methods-CramerLundberg.R'
+    'methods-CramerLundbergCapitalInjections.R'
     'ruin_probability.R'
     'zzz.R'
 RoxygenNote: 6.0.1

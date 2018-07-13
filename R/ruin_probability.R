@@ -3,7 +3,8 @@ ruin_probability <- function(model,
                              time_horizon,
                              simulation_number = NULL,
                              ci_level = NULL,
-                             parallel = TRUE) {
+                             parallel = NULL,
+                             return_paths = NULL) {
 
     # set default arguments
     #---------------------------------------------------------------------------
@@ -14,8 +15,39 @@ ruin_probability <- function(model,
     if(is.null(ci_level))
         ci_level <- 0.95
 
+    if(is.null(parallel))
+        parallel <- TRUE
+
+    if(is.null(return_paths))
+        return_paths <- FALSE
+
     # validate arguments
     #---------------------------------------------------------------------------
+
+    stopifnot(
+        isS4(model),
+
+        is.numeric(time_horizon) &&
+            length(time_horizon) == 1 &&
+            time_horizon > 0,
+
+        is.numeric(simulation_number) &&
+            length(simulation_number) == 1 &&
+            simulation_number > 0,
+
+        is.numeric(ci_level) &&
+            length(ci_level) == 1 &&
+            ci_level >= 0 &&
+            ci_level <= 1,
+
+        is.logical(parallel) &&
+            length(parallel) == 1,
+
+        is.logical(return_paths) &&
+            length(return_paths) == 1
+
+
+    )
 
     # simulate
     #---------------------------------------------------------------------------
@@ -97,14 +129,16 @@ ruin_probability <- function(model,
 
     z <- qnorm(0.5 + ci_level / 2)
 
-    rval <- list(
-        ruin_probability = c(
-            lower_bound = p - z * std / sqrt(simulation_number),
-            estimate = p,
-            upper_bound = p + z * std / sqrt(simulation_number)
-        ),
-        simulated_processes = processes
+    rval <- list()
+
+    rval[["ruin_probability"]] <- c(
+        lower_bound = p - z * std / sqrt(simulation_number),
+        estimate = p,
+        upper_bound = p + z * std / sqrt(simulation_number)
     )
+
+    if(return_paths)
+        rval[["simulated_paths"]] <- processes
 
     return(rval)
 
