@@ -29,23 +29,27 @@ ruin_probability <- function(model,
 
         is.numeric(time_horizon) &&
             length(time_horizon) == 1 &&
+            isFALSE(is.na(time_horizon)) &&
             time_horizon > 0,
 
         is.numeric(simulation_number) &&
             length(simulation_number) == 1 &&
+            isFALSE(is.na(simulation_number)) &&
             simulation_number > 0,
 
         is.numeric(ci_level) &&
             length(ci_level) == 1 &&
+            isFALSE(is.na(ci_level)) &&
             ci_level >= 0 &&
             ci_level <= 1,
 
         is.logical(parallel) &&
+            isFALSE(is.na(parallel)) &&
             length(parallel) == 1,
 
         is.logical(return_paths) &&
+            isFALSE(is.na(return_paths)) &&
             length(return_paths) == 1
-
 
     )
 
