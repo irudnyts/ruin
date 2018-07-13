@@ -3,7 +3,7 @@ setClass(Class = "CramerLundberg",
            initial_capital = "numeric",
            premium_rate = "numeric",
            claim_poisson_arrival_rate = "numeric",
-           claim_size_distribution = "numeric",
+           claim_size_generator = "numeric",
            claim_size_parameters = "numeric"
          )
 )
@@ -29,12 +29,12 @@ setClass(Class = "CramerLundbergCapitalInjections",
            premium_rate = "numeric",
            claim_poisson_arrival_rate = "numeric",
            claim_size_mixing_parameter = "numeric",
-           claim_size_light_tail_distribution = "function",
+           claim_size_light_tail_generator = "function",
            claim_size_light_tail_parameters = "list",
-           claim_size_heavy_tail_distribution = "function",
+           claim_size_heavy_tail_generator = "function",
            claim_size_heavy_tail_parameters = "list",
            capital_injection_poisson_rate = "numeric",
-           capital_injection_distribution = "function",
+           capital_injection_generator = "function",
            capital_injection_parameters = "list"
          )
 )

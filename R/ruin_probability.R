@@ -25,6 +25,7 @@ ruin_probability <- function(model,
   #---------------------------------------------------------------------------
 
   stopifnot(
+
     isS4(model),
 
     is.numeric(time_horizon) &&
