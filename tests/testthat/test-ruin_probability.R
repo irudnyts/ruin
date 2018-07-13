@@ -170,3 +170,13 @@ for(i in 1:nrow(exact_probabilities)) {
 
 }
 
+# References:
+# [1] Thorin O., Wikstad N., 1973, Numerical evaluation of ruin probabilities
+#     for a finite period, Astin Bulletin.
+#
+# [2] Breuer L., Badescu A.L., 2011, A generalised Gerber–Shiu measure for
+#     Markov-additive risk processes with phase-type claims and capital
+#     injections, Scandinavian Actuarial Journal.
+
+
+
