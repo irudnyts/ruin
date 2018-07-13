@@ -12,10 +12,10 @@ setClass(Class = "CramerLundberg",
 
 #' @export
 CramerLundberg <- function(initial_capital = NULL,
-                                   premium_rate = NULL,
-                                   claim_poisson_arrival_rate = NULL,
-                                   claim_size_distribution = NULL,
-                                   claim_size_parameters = NULL) {
+                           premium_rate = NULL,
+                           claim_poisson_arrival_rate = NULL,
+                           claim_size_distribution = NULL,
+                           claim_size_parameters = NULL) {
 
     # validate arguments
 

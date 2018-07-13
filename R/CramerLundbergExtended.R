@@ -219,11 +219,11 @@ setMethod(
                 } else {
 
                     # add max_time_horizon to a path
-                        path <- rbind(
-                            path,
-                            c(max_time_horizon,
-                              path[nrow(path), 2] + (max_time_horizon - path[nrow(path), 1]) * pr)
-                        )
+                    path <- rbind(
+                        path,
+                        c(max_time_horizon,
+                          path[nrow(path), 2] + (max_time_horizon - path[nrow(path), 1]) * pr)
+                    )
 
                     break
 
