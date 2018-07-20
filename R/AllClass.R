@@ -55,15 +55,8 @@ setClass(
 
 setClass(
   Class = "CramerLundbergCapitalInjections",
+  contains = "CramerLundberg",
   slots = list(
-    initial_capital = "numeric",
-    premium_rate = "numeric",
-    claim_poisson_arrival_rate = "numeric",
-    claim_size_mixing_parameter = "numeric",
-    claim_size_light_tail_generator = "function",
-    claim_size_light_tail_parameters = "list",
-    claim_size_heavy_tail_generator = "function",
-    claim_size_heavy_tail_parameters = "list",
     capital_injection_poisson_rate = "numeric",
     capital_injection_generator = "function",
     capital_injection_parameters = "list"

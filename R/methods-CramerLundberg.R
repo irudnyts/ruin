@@ -28,6 +28,9 @@ setValidity(
                   paste0("premium_rate must be a numeric length 1",
                          " non-negative vector containing no missing values."))
 
+    # check claim_poisson_arrival_rate
+    #---------------------------------------------------------------------------
+
     if(isFALSE(length(claim_poisson_arrival_rate) == 1) ||
        is.na(claim_poisson_arrival_rate) ||
        claim_poisson_arrival_rate <= 0)
@@ -58,8 +61,8 @@ setValidity(
       errors
     }
 
-
   }
+
 )
 
 #' @export

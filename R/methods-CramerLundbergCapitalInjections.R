@@ -2,15 +2,60 @@
 #' @include AllGeneric.R
 NULL
 
+setValidity(
+  Class = "CramerLundbergCapitalInjections",
+  method = function(object) {
+
+    errors <- character(0)
+
+
+    # check capital_injection_poisson_rate
+    #---------------------------------------------------------------------------
+
+    if(isFALSE(length(capital_injection_poisson_rate) == 1) ||
+       is.na(capital_injection_poisson_rate) ||
+       capital_injection_poisson_rate <= 0)
+      errors <- c(errors,
+                  paste0("capital_injection_poisson_rate must be a numeric",
+                         " length 1 positive vector containing no missing",
+                         " values."))
+
+    # check formal arguments of capital_injection_generator and
+    # capital_injection_parameters
+    #---------------------------------------------------------------------------
+
+    if(
+      isFALSE(
+        all(
+          names(capital_injection_parameters) %in%
+          names(formals(capital_injection_generator))
+        )
+      )
+    )
+      errors <- c(errors,
+                  paste0("capital_injection_parameters must have the same",
+                         " names as formal argument of",
+                         " capital_injection_generator"))
+
+    # return TRUE if slots are valid, otherwise errors messeges
+    #---------------------------------------------------------------------------
+
+    if(length(errors) == 0) {
+      TRUE
+    } else {
+      errors
+    }
+
+  }
+
+)
+
 #' @export
 CramerLundbergCapitalInjections <- function(initial_capital = NULL,
                                             premium_rate = NULL,
                                             claim_poisson_arrival_rate = NULL,
-                                            claim_size_mixing_parameter = NULL,
-                                            claim_size_light_tail_generator = NULL,
-                                            claim_size_light_tail_parameters = NULL,
-                                            claim_size_heavy_tail_generator = NULL,
-                                            claim_size_heavy_tail_parameters = NULL,
+                                            claim_size_generator = NULL,
+                                            claim_size_parameters = NULL,
                                             capital_injection_poisson_rate = NULL,
                                             capital_injection_generator = NULL,
                                             capital_injection_parameters = NULL) {
@@ -27,20 +72,11 @@ CramerLundbergCapitalInjections <- function(initial_capital = NULL,
   if(is.null(claim_poisson_arrival_rate))
     claim_poisson_arrival_rate <- 1
 
-  if(is.null(claim_size_mixing_parameter))
-    claim_size_mixing_parameter <- 0.01
+  if(is.null(claim_size_generator))
+    claim_size_generator <- rexp
 
-  if(is.null(claim_size_light_tail_generator))
-    claim_size_light_tail_generator <- rexp
-
-  if(is.null(claim_size_light_tail_parameters))
-    claim_size_light_tail_parameters <- list(rate = 1)
-
-  if(is.null(claim_size_heavy_tail_generator))
-    claim_size_heavy_tail_generator <- actuar::rpareto2
-
-  if(is.null(claim_size_heavy_tail_parameters))
-    claim_size_heavy_tail_parameters <- list(shape = 3, scale = 2)
+  if(is.null(claim_size_parameters))
+    claim_size_parameters <- list(rate = 1)
 
   if(is.null(capital_injection_poisson_rate))
     capital_injection_poisson_rate <- 1
@@ -51,49 +87,6 @@ CramerLundbergCapitalInjections <- function(initial_capital = NULL,
   if(is.null(capital_injection_parameters))
     capital_injection_parameters <- list(rate = 1)
 
-  # validate arguments
-  #-----------------------------------------------------------------------------
-
-  stopifnot(
-
-    is.numeric(initial_capital) &&
-      length(initial_capital) == 1 &&
-      isFALSE(is.na(initial_capital)),
-
-    is.numeric(premium_rate) &&
-      length(premium_rate) == 1 &&
-      isFALSE(is.na(premium_rate)),
-
-    is.numeric(claim_poisson_arrival_rate) &&
-      length(claim_poisson_arrival_rate) == 1 &&
-      isFALSE(is.na(claim_poisson_arrival_rate)) &&
-      claim_poisson_arrival_rate > 0,
-
-    is.numeric(claim_size_mixing_parameter) &&
-      length(claim_size_mixing_parameter) == 1 &&
-      isFALSE(is.na(claim_size_mixing_parameter)) &&
-      claim_size_mixing_parameter >= 0 &&
-      claim_size_mixing_parameter <= 1,
-
-    is.function(claim_size_light_tail_generator),
-
-    is.vector(claim_size_light_tail_parameters),
-
-    is.function(claim_size_heavy_tail_generator),
-
-    is.vector(claim_size_heavy_tail_parameters),
-
-    is.numeric(capital_injection_poisson_rate) &&
-      length(capital_injection_poisson_rate) == 1 &&
-      isFALSE(is.na(capital_injection_poisson_rate)) &&
-      capital_injection_poisson_rate > 0,
-
-    is.function(capital_injection_generator),
-
-    is.vector(capital_injection_parameters)
-
-  )
-
   # generate an object and return it
   #-----------------------------------------------------------------------------
 
@@ -102,11 +95,8 @@ CramerLundbergCapitalInjections <- function(initial_capital = NULL,
     initial_capital = initial_capital,
     premium_rate = premium_rate,
     claim_poisson_arrival_rate = claim_poisson_arrival_rate,
-    claim_size_mixing_parameter = claim_size_mixing_parameter,
-    claim_size_light_tail_generator = claim_size_light_tail_generator,
-    claim_size_light_tail_parameters = claim_size_light_tail_parameters,
-    claim_size_heavy_tail_generator = claim_size_heavy_tail_generator,
-    claim_size_heavy_tail_parameters = claim_size_heavy_tail_parameters,
+    claim_size_generator = claim_size_generator,
+    claim_size_parameters = claim_size_parameters,
     capital_injection_poisson_rate = capital_injection_poisson_rate,
     capital_injection_generator = capital_injection_generator,
     capital_injection_parameters = capital_injection_parameters
@@ -145,8 +135,6 @@ setMethod(
 
     stopifnot(
 
-      isS4(model),
-
       is.numeric(max_time_horizon) &&
         length(max_time_horizon) == 1 &&
         isFALSE(is.na(max_time_horizon)) &&
@@ -174,11 +162,8 @@ setMethod(
     f_p <- model@capital_injection_generator
     param_p <- model@capital_injection_parameters
     lambda_n <- model@claim_poisson_arrival_rate
-    eps <- model@claim_size_mixing_parameter
-    f_n1 <- model@claim_size_light_tail_generator
-    param_n1 <- model@claim_size_light_tail_parameters
-    f_n2 <- model@claim_size_heavy_tail_generator
-    param_n2 <- model@claim_size_heavy_tail_parameters
+    f_n <- model@claim_size_light_tail_generator
+    param_n <- model@claim_size_light_tail_parameters
 
     # simulate process
     #-----------------------------------------------------------------------
@@ -186,8 +171,7 @@ setMethod(
     # add n = 1 to all distributions parameters in order to generate only
     # one r.v.
     param_p[["n"]] <- 1
-    param_n1[["n"]] <- 1
-    param_n2[["n"]] <- 1
+    param_n[["n"]] <- 1
 
     # initialize process
     path <- matrix(NA, nrow = 1, ncol = 2)
@@ -235,9 +219,7 @@ setMethod(
           if(ca_pos > ca_neg) {
 
             # current negative jump's size
-            cs_neg <- ifelse(test = rbinom(n = 1, size = 1, prob = eps) == 1,
-                             yes = do.call(f_n2, param_n2),
-                             no = do.call(f_n1, param_n1))
+            cs_neg <- do.call(what = f_n, args = param_n)
 
             path <- add_jump_to_path(path, ca_neg, -cs_neg)
 
@@ -257,9 +239,7 @@ setMethod(
             # current positive jump's size
             cs_pos <- do.call(f_p, param_p)
             # current negative jump's size
-            cs_neg <- ifelse(test = rbinom(n = 1, size = 1, prob = eps) == 1,
-                             yes = do.call(f_n2, param_n2),
-                             no = do.call(f_n1, param_n1))
+            cs_neg <- do.call(what = f_n, args = param_n)
 
             path <- add_jump_to_path(path, ca_pos, cs_pos - cs_neg)
 
