@@ -6,6 +6,13 @@ setValidity(
   Class = "CramerLundbergCapitalInjections",
   method = function(object) {
 
+    # define aliases
+    #---------------------------------------------------------------------------
+
+    capital_injection_poisson_rate <- object@capital_injection_poisson_rate
+    capital_injection_size_parameters <- object@capital_injection_size_parameters
+    capital_injection_size_generator <- object@capital_injection_size_generator
+
     errors <- character(0)
 
 
@@ -20,22 +27,22 @@ setValidity(
                          " length 1 positive vector containing no missing",
                          " values."))
 
-    # check formal arguments of capital_injection_generator and
-    # capital_injection_parameters
+    # check formal arguments of capital_injection_size_generator and
+    # capital_injection_size_parameters
     #---------------------------------------------------------------------------
 
     if(
       isFALSE(
         all(
-          names(capital_injection_parameters) %in%
-          names(formals(capital_injection_generator))
+          names(capital_injection_size_parameters) %in%
+          names(formals(capital_injection_size_generator))
         )
       )
     )
       errors <- c(errors,
-                  paste0("capital_injection_parameters must have the same",
+                  paste0("capital_injection_size_parameters must have the same",
                          " names as formal argument of",
-                         " capital_injection_generator"))
+                         " capital_injection_size_generator"))
 
     # return TRUE if slots are valid, otherwise errors messeges
     #---------------------------------------------------------------------------
@@ -57,8 +64,8 @@ CramerLundbergCapitalInjections <- function(initial_capital = NULL,
                                             claim_size_generator = NULL,
                                             claim_size_parameters = NULL,
                                             capital_injection_poisson_rate = NULL,
-                                            capital_injection_generator = NULL,
-                                            capital_injection_parameters = NULL) {
+                                            capital_injection_size_generator = NULL,
+                                            capital_injection_size_parameters = NULL) {
 
   # set default arguments
   #-----------------------------------------------------------------------------
@@ -81,11 +88,11 @@ CramerLundbergCapitalInjections <- function(initial_capital = NULL,
   if(is.null(capital_injection_poisson_rate))
     capital_injection_poisson_rate <- 1
 
-  if(is.null(capital_injection_generator))
-    capital_injection_generator <- rexp
+  if(is.null(capital_injection_size_generator))
+    capital_injection_size_generator <- rexp
 
-  if(is.null(capital_injection_parameters))
-    capital_injection_parameters <- list(rate = 1)
+  if(is.null(capital_injection_size_parameters))
+    capital_injection_size_parameters <- list(rate = 1)
 
   # generate an object and return it
   #-----------------------------------------------------------------------------
@@ -98,8 +105,8 @@ CramerLundbergCapitalInjections <- function(initial_capital = NULL,
     claim_size_generator = claim_size_generator,
     claim_size_parameters = claim_size_parameters,
     capital_injection_poisson_rate = capital_injection_poisson_rate,
-    capital_injection_generator = capital_injection_generator,
-    capital_injection_parameters = capital_injection_parameters
+    capital_injection_size_generator = capital_injection_size_generator,
+    capital_injection_size_parameters = capital_injection_size_parameters
   )
 
   return(model)
@@ -159,8 +166,8 @@ setMethod(
     u <- model@initial_capital
     pr <- model@premium_rate
     lambda_p <- model@capital_injection_poisson_rate
-    f_p <- model@capital_injection_generator
-    param_p <- model@capital_injection_parameters
+    f_p <- model@capital_injection_size_generator
+    param_p <- model@capital_injection_size_parameters
     lambda_n <- model@claim_poisson_arrival_rate
     f_n <- model@claim_size_generator
     param_n <- model@claim_size_parameters

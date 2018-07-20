@@ -14,8 +14,9 @@ BugReports: http://github.com/irudnyts/ruin
 Depends:
     R (>= 3.4.3)
 Imports:
-    actuar(>= 2.3.0),
-    parallel
+    actuar (>= 2.3.0),
+    parallel,
+    ggplot2 (>= 2.2.1)
 Collate:
     'AllClass.R'
     'AllGeneric.R'
@@ -23,6 +24,7 @@ Collate:
     'methods-CramerLundbergCapitalInjections.R'
     'methods-SparreAndersen.R'
     'methods-SparreAndersenCapitalInjections.R'
+    'plot_path.R'
     'ruin_probability.R'
     'zzz.R'
 RoxygenNote: 6.0.1

@@ -6,6 +6,16 @@ setValidity(
   Class = "SparreAndersen",
   method = function(object) {
 
+    # define aliases
+    #---------------------------------------------------------------------------
+
+    initial_capital <- object@initial_capital
+    premium_rate <- object@premium_rate
+    claim_interarrival_generator <- object@claim_interarrival_generator
+    claim_interarrival_parameters <- object@claim_interarrival_parameters
+    claim_size_parameters <- object@claim_size_parameters
+    claim_size_generator <- object@claim_size_generator
+
     errors <- character(0)
 
     # check initial_capital

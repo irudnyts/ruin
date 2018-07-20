@@ -36,8 +36,8 @@ setClass(
   contains = "CramerLundberg",
   slots = list(
     capital_injection_poisson_rate = "numeric",
-    capital_injection_generator = "function",
-    capital_injection_parameters = "list"
+    capital_injection_size_generator = "function",
+    capital_injection_size_parameters = "list"
   )
 )
 
@@ -100,8 +100,8 @@ setClass(
   slots = list(
     capital_injection_interarrival_generator = "function",
     capital_injection_interarrival_parameters = "list",
-    capital_injection_generator = "function",
-    capital_injection_parameters = "list"
+    capital_injection_size_generator = "function",
+    capital_injection_size_parameters = "list"
   )
 )
 

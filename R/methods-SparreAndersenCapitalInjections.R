@@ -6,6 +6,14 @@ setValidity(
   Class = "SparreAndersenCapitalInjections",
   method = function(object) {
 
+    # define aliases
+    #---------------------------------------------------------------------------
+
+    capital_injection_interarrival_generator <- object@capital_injection_interarrival_generator
+    capital_injection_interarrival_parameters <- object@capital_injection_interarrival_parameters
+    capital_injection_size_parameters <- object@capital_injection_size_parameters
+    capital_injection_size_generator <- object@capital_injection_size_generator
+
     errors <- character(0)
 
     # check formal arguments of capital_injection_interarrival_generator and
@@ -25,22 +33,22 @@ setValidity(
                          " the same names as formal argument of",
                          " capital_injection_interarrival_generator"))
 
-    # check formal arguments of capital_injection_generator and
-    # capital_injection_parameters
+    # check formal arguments of capital_injection_size_generator and
+    # capital_injection_size_parameters
     #---------------------------------------------------------------------------
 
     if(
       isFALSE(
         all(
-          names(capital_injection_parameters) %in%
-          names(formals(capital_injection_generator))
+          names(capital_injection_size_parameters) %in%
+          names(formals(capital_injection_size_generator))
         )
       )
     )
       errors <- c(errors,
-                  paste0("capital_injection_parameters must have the same",
+                  paste0("capital_injection_size_parameters must have the same",
                          " names as formal argument of",
-                         " capital_injection_generator"))
+                         " capital_injection_size_generator"))
 
     # return TRUE if slots are valid, otherwise errors messeges
     #---------------------------------------------------------------------------
@@ -65,8 +73,8 @@ SparreAndersenCapitalInjections <- function(
   claim_size_parameters = NULL,
   capital_injection_interarrival_generator = NULL,
   capital_injection_interarrival_parameters = NULL,
-  capital_injection_generator = NULL,
-  capital_injection_parameters = NULL
+  capital_injection_size_generator = NULL,
+  capital_injection_size_parameters = NULL
 ) {
 
   # set default arguments
@@ -96,11 +104,11 @@ SparreAndersenCapitalInjections <- function(
   if(is.null(capital_injection_interarrival_parameters))
     capital_injection_interarrival_parameters <- list(rate = 1)
 
-  if(is.null(capital_injection_generator))
-    capital_injection_generator <- rexp
+  if(is.null(capital_injection_size_generator))
+    capital_injection_size_generator <- rexp
 
-  if(is.null(capital_injection_parameters))
-    capital_injection_parameters <- list(rate = 1)
+  if(is.null(capital_injection_size_parameters))
+    capital_injection_size_parameters <- list(rate = 1)
 
   # generate an object and return it
   #-----------------------------------------------------------------------------
@@ -115,8 +123,8 @@ SparreAndersenCapitalInjections <- function(
     claim_size_parameters = claim_size_parameters,
     capital_injection_interarrival_generator = capital_injection_interarrival_generator,
     capital_injection_interarrival_parameters = capital_injection_interarrival_parameters,
-    capital_injection_generator = capital_injection_generator,
-    capital_injection_parameters = capital_injection_parameters
+    capital_injection_size_generator = capital_injection_size_generator,
+    capital_injection_size_parameters = capital_injection_size_parameters
   )
 
   return(model)
@@ -179,8 +187,8 @@ setMethod(
 
     f_pa <- model@capital_injection_interarrival_generator
     param_pa <- model@capital_injection_interarrival_parameters
-    f_ps <- model@capital_injection_generator
-    param_ps <- model@capital_injection_parameters
+    f_ps <- model@capital_injection_size_generator
+    param_ps <- model@capital_injection_size_parameters
 
     f_na <- model@claim_interarrival_generator
     param_na <- model@claim_interarrival_parameters
@@ -225,9 +233,9 @@ setMethod(
     a_pos <- numeric() # arrival times of positive jumps
     a_neg <- numeric() # arrival times of negative jumps
 
-    ca_pos <- do.call(what = f_pa, args = params_pa) # current arrival time of a
+    ca_pos <- do.call(what = f_pa, args = param_pa) # current arrival time of a
                                                      # positive jump
-    ca_neg <- do.call(what = f_na, args = params_na) # current arrival time of a
+    ca_neg <- do.call(what = f_na, args = param_na) # current arrival time of a
                                                      # negative jump
 
     is_ruined <- FALSE
@@ -286,7 +294,7 @@ setMethod(
           } else if(ca_pos < ca_neg) {
 
             # current positive jump's size
-            cs_pos <- do.call(f_p, param_p)
+            cs_pos <- do.call(what = f_ps, args = param_ps)
 
             path <- add_jump_to_path(path, ca_pos, cs_pos)
 
