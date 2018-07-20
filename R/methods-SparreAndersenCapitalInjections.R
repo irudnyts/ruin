@@ -3,62 +3,44 @@
 NULL
 
 setValidity(
-  Class = "SparreAndersen",
+  Class = "SparreAndersenCapitalInjections",
   method = function(object) {
 
     errors <- character(0)
 
-    # check initial_capital
-    #---------------------------------------------------------------------------
-
-    if(isFALSE(length(initial_capital) == 1) ||
-       is.na(initial_capital) ||
-       initial_capital < 0)
-      errors <- c(errors,
-                  paste0("initial_capital must be a numeric length 1",
-                         " non-negative vector containing no missing values."))
-
-    # check premium_rate
-    #---------------------------------------------------------------------------
-
-    if(isFALSE(length(premium_rate) == 1) ||
-       is.na(premium_rate) ||
-       premium_rate < 0)
-      errors <- c(errors,
-                  paste0("premium_rate must be a numeric length 1",
-                         " non-negative vector containing no missing values."))
-
-
-    # check formal arguments of claim_interarrival_generator and
-    # claim_interarrival_parameters
+    # check formal arguments of capital_injection_interarrival_generator and
+    # capital_injection_interarrival_parameters
     #---------------------------------------------------------------------------
 
     if(
       isFALSE(
         all(
-          names(claim_interarrival_parameters) %in%
-          names(formals(claim_interarrival_generator))
+          names(capital_injection_interarrival_parameters) %in%
+          names(formals(capital_injection_interarrival_generator))
         )
       )
     )
       errors <- c(errors,
-                  paste0("claim_interarrival_parameters must have the same",
+                  paste0("capital_injection_interarrival_parameters must have",
+                         " the same names as formal argument of",
+                         " capital_injection_interarrival_generator"))
+
+    # check formal arguments of capital_injection_generator and
+    # capital_injection_parameters
+    #---------------------------------------------------------------------------
+
+    if(
+      isFALSE(
+        all(
+          names(capital_injection_parameters) %in%
+          names(formals(capital_injection_generator))
+        )
+      )
+    )
+      errors <- c(errors,
+                  paste0("capital_injection_parameters must have the same",
                          " names as formal argument of",
-                         " claim_interarrival_generator"))
-
-    # check formal arguments of claim_size_generator and claim_size_parameters
-    #---------------------------------------------------------------------------
-
-    if(
-      isFALSE(
-        all(
-          names(claim_size_parameters) %in% names(formals(claim_size_generator))
-        )
-      )
-    )
-      errors <- c(errors,
-                  paste0("claim_size_parameters must have the same names as",
-                         " formal argument of claim_size_generator."))
+                         " capital_injection_generator"))
 
     # return TRUE if slots are valid, otherwise errors messeges
     #---------------------------------------------------------------------------
@@ -74,12 +56,18 @@ setValidity(
 )
 
 #' @export
-SparreAndersen <- function(initial_capital = NULL,
-                           premium_rate = NULL,
-                           claim_interarrival_generator = NULL,
-                           claim_interarrival_parameters = NULL,
-                           claim_size_generator = NULL,
-                           claim_size_parameters = NULL) {
+SparreAndersenCapitalInjections <- function(
+  initial_capital = NULL,
+  premium_rate = NULL,
+  claim_interarrival_generator = NULL,
+  claim_interarrival_parameters = NULL,
+  claim_size_generator = NULL,
+  claim_size_parameters = NULL,
+  capital_injection_interarrival_generator = NULL,
+  capital_injection_interarrival_parameters = NULL,
+  capital_injection_generator = NULL,
+  capital_injection_parameters = NULL
+) {
 
   # set default arguments
   #-----------------------------------------------------------------------------
@@ -102,17 +90,33 @@ SparreAndersen <- function(initial_capital = NULL,
   if(is.null(claim_size_parameters))
     claim_size_parameters <- list(rate = 1)
 
+  if(is.null(capital_injection_interarrival_generator))
+    capital_injection_interarrival_generator <- rexp
+
+  if(is.null(capital_injection_interarrival_parameters))
+    capital_injection_interarrival_parameters <- list(rate = 1)
+
+  if(is.null(capital_injection_generator))
+    capital_injection_generator <- rexp
+
+  if(is.null(capital_injection_parameters))
+    capital_injection_parameters <- list(rate = 1)
+
   # generate an object and return it
   #-----------------------------------------------------------------------------
 
   model <- new(
-    Class = "SparreAndersen",
+    Class = "SparreAndersenCapitalInjections",
     initial_capital = initial_capital,
     premium_rate = premium_rate,
     claim_interarrival_generator = claim_interarrival_generator,
     claim_interarrival_parameters = claim_interarrival_parameters,
     claim_size_generator = claim_size_generator,
-    claim_size_parameters = claim_size_parameters
+    claim_size_parameters = claim_size_parameters,
+    capital_injection_interarrival_generator = capital_injection_interarrival_generator,
+    capital_injection_interarrival_parameters = capital_injection_interarrival_parameters,
+    capital_injection_generator = capital_injection_generator,
+    capital_injection_parameters = capital_injection_parameters
   )
 
   return(model)
@@ -121,7 +125,7 @@ SparreAndersen <- function(initial_capital = NULL,
 
 setMethod(
   f = "simulate_path",
-  signature = c(model = "SparreAndersen"),
+  signature = c(model = "SparreAndersenCapitalInjections"),
   definition = function(model,
                         max_time_horizon = NULL,
                         max_simulation_time = NULL,
@@ -148,8 +152,6 @@ setMethod(
 
     stopifnot(
 
-      isS4(model),
-
       is.numeric(max_time_horizon) &&
         length(max_time_horizon) == 1 &&
         isFALSE(is.na(max_time_horizon)) &&
@@ -173,18 +175,27 @@ setMethod(
 
     u <- model@initial_capital
     pr <- model@premium_rate
-    f_a <- model@claim_interarrival_generator
-    param_a <- model@claim_interarrival_parameters
-    f_s <- model@claim_size_generator
-    param_s <- model@claim_size_parameters
+
+
+    f_pa <- model@capital_injection_interarrival_generator
+    param_pa <- model@capital_injection_interarrival_parameters
+    f_ps <- model@capital_injection_generator
+    param_ps <- model@capital_injection_parameters
+
+    f_na <- model@claim_interarrival_generator
+    param_na <- model@claim_interarrival_parameters
+    f_ns <- model@claim_size_generator
+    param_ns <- model@claim_size_parameters
 
     # simulate process
     #-----------------------------------------------------------------------
 
-    # add n = 1 to distribution's parameters in order to generate only
+    # add n = 1 to all distributions parameters in order to generate only
     # one r.v.
-    param_a[["n"]] <- 1
-    param_s[["n"]] <- 1
+    param_pa[["n"]] <- 1
+    param_ps[["n"]] <- 1
+    param_na[["n"]] <- 1
+    param_ns[["n"]] <- 1
 
     # initialize process
     path <- matrix(NA, nrow = 1, ncol = 2)
@@ -208,12 +219,16 @@ setMethod(
       path
     }
 
+    s_pos <- numeric() # positive jumps' sizes
     s_neg <- numeric() # positive jumps' sizes
 
+    a_pos <- numeric() # arrival times of positive jumps
     a_neg <- numeric() # arrival times of negative jumps
 
-    ca_neg <- do.call(what = f_a, args = param_a) # itinital arrival time of a
-                                                  # jump
+    ca_pos <- do.call(what = f_pa, args = params_pa) # current arrival time of a
+                                                     # positive jump
+    ca_neg <- do.call(what = f_na, args = params_na) # current arrival time of a
+                                                     # negative jump
 
     is_ruined <- FALSE
 
@@ -225,22 +240,62 @@ setMethod(
                              time2 = start_time,
                              units = "secs")) < max_simulation_time) {
 
-        if(ca_neg < max_time_horizon) {
+        if(ca_pos < max_time_horizon || ca_neg < max_time_horizon) {
 
-          # current negative jump's size
-          cs_neg <- do.call(what = f_s, args = param_s)
+          if(ca_pos > ca_neg) {
 
-          path <- add_jump_to_path(path, ca_neg, -cs_neg)
+            # current negative jump's size
+            cs_neg <- do.call(what = f_ns, args = param_ns)
 
-          s_neg <- c(s_neg, cs_neg)
-          a_neg <- c(a_neg, ca_neg)
+            path <- add_jump_to_path(path, ca_neg, -cs_neg)
 
-          if(path[nrow(path), 2] < 0) {
-            is_ruined <- TRUE
-            break
+            s_neg <- c(s_neg, cs_neg)
+            a_neg <- c(a_neg, ca_neg)
+
+            if(path[nrow(path), 2] < 0) {
+              is_ruined <- TRUE
+              break
+            }
+
+            ca_neg <- ca_neg + do.call(what = f_na, args = param_na)
+
+
+          } else if(ca_pos == ca_neg) {
+
+            # current positive jump's size
+            cs_pos <- do.call(what = f_ps, args = param_ps)
+            # current negative jump's size
+            cs_neg <- do.call(what = f_ns, args = param_ns)
+
+            path <- add_jump_to_path(path, ca_pos, cs_pos - cs_neg)
+
+            s_pos <- c(s_pos, cs_pos)
+            s_neg <- c(s_neg, cs_neg)
+
+            a_pos <- c(a_pos, ca_pos)
+            a_neg <- c(a_neg, ca_neg)
+
+            if(path[nrow(path), 2] < 0) {
+              is_ruined <- TRUE
+              break
+            }
+
+            ca_pos <- ca_pos + do.call(what = f_pa, args = param_pa)
+            ca_neg <- ca_neg + do.call(what = f_na, args = param_na)
+
+          } else if(ca_pos < ca_neg) {
+
+            # current positive jump's size
+            cs_pos <- do.call(f_p, param_p)
+
+            path <- add_jump_to_path(path, ca_pos, cs_pos)
+
+            s_pos <- c(s_pos, cs_pos)
+            a_pos <- c(a_pos, ca_pos)
+
+            ca_pos <- ca_pos + do.call(what = f_pa, args = param_pa)
+
           }
-
-          ca_neg <- ca_neg + do.call(what = f_a, args = param_a)
 
         } else {
 
@@ -271,11 +326,13 @@ setMethod(
 
     # generate a returning object
     process <- new(
-      Class = "PathSparreAndersen",
+      Class = "PathSparreAndersenCapitalInjections",
       model = model,
       path = path,
       claim_sizes = s_neg,
       claim_arrival_times = a_neg,
+      capital_injection_sizes = s_pos,
+      capital_injection_arrival_times = a_pos,
       time_horizon = path[nrow(path), 1],
       is_ruined = is_ruined,
       elapsed_time = elapsed_time,
@@ -287,5 +344,4 @@ setMethod(
     return(process)
 
   }
-
 )

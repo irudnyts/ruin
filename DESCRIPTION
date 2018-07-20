@@ -22,6 +22,7 @@ Collate:
     'methods-CramerLundberg.R'
     'methods-CramerLundbergCapitalInjections.R'
     'methods-SparreAndersen.R'
+    'methods-SparreAndersenCapitalInjections.R'
     'ruin_probability.R'
     'zzz.R'
 RoxygenNote: 6.0.1

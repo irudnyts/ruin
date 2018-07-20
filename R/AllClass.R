@@ -98,7 +98,8 @@ setClass(
   Class = "SparreAndersenCapitalInjections",
   contains = "SparreAndersen",
   slots = list(
-    capital_injection_poisson_rate = "numeric",
+    capital_injection_interarrival_generator = "function",
+    capital_injection_interarrival_parameters = "list",
     capital_injection_generator = "function",
     capital_injection_parameters = "list"
   )

@@ -162,8 +162,8 @@ setMethod(
     f_p <- model@capital_injection_generator
     param_p <- model@capital_injection_parameters
     lambda_n <- model@claim_poisson_arrival_rate
-    f_n <- model@claim_size_light_tail_generator
-    param_n <- model@claim_size_light_tail_parameters
+    f_n <- model@claim_size_generator
+    param_n <- model@claim_size_parameters
 
     # simulate process
     #-----------------------------------------------------------------------
