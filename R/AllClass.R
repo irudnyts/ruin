@@ -1,3 +1,6 @@
+#-------------------------------------------------------------------------------
+# CramerLundberg classes
+
 setClass(
   Class = "CramerLundberg",
   slots = list(
@@ -24,6 +27,40 @@ setClass(
     seed = "integer"
   )
 )
+
+#-------------------------------------------------------------------------------
+# CramerLundbergCapitalInjections classes
+
+setClass(
+  Class = "CramerLundbergCapitalInjections",
+  contains = "CramerLundberg",
+  slots = list(
+    capital_injection_poisson_rate = "numeric",
+    capital_injection_generator = "function",
+    capital_injection_parameters = "list"
+  )
+)
+
+setClass(
+  Class = "PathCramerLundbergCapitalInjections",
+  slots = list(
+    model = "CramerLundbergCapitalInjections",
+    path = "matrix",
+    claim_sizes = "numeric",
+    claim_arrival_times = "numeric",
+    capital_injection_sizes = "numeric",
+    capital_injection_arrival_times = "numeric",
+    time_horizon = "numeric",
+    is_ruined = "logical",
+    elapsed_time = "numeric",
+    max_time_horizon = "numeric",
+    max_simulation_time = "numeric",
+    seed = "integer"
+  )
+)
+
+#-------------------------------------------------------------------------------
+# SparreAndersen classes
 
 setClass(
   Class = "SparreAndersen",
@@ -53,9 +90,13 @@ setClass(
   )
 )
 
+#-------------------------------------------------------------------------------
+# SparreAndersenCapitalInjections classes
+
+
 setClass(
-  Class = "CramerLundbergCapitalInjections",
-  contains = "CramerLundberg",
+  Class = "SparreAndersenCapitalInjections",
+  contains = "SparreAndersen",
   slots = list(
     capital_injection_poisson_rate = "numeric",
     capital_injection_generator = "function",
@@ -64,9 +105,9 @@ setClass(
 )
 
 setClass(
-  Class = "PathCramerLundbergCapitalInjections",
+  Class = "PathSparreAndersenCapitalInjections",
   slots = list(
-    model = "CramerLundbergCapitalInjections",
+    model = "SparreAndersenCapitalInjections",
     path = "matrix",
     claim_sizes = "numeric",
     claim_arrival_times = "numeric",

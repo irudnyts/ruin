@@ -2,6 +2,77 @@
 #' @include AllGeneric.R
 NULL
 
+setValidity(
+  Class = "SparreAndersen",
+  method = function(object) {
+
+    errors <- character(0)
+
+    # check initial_capital
+    #---------------------------------------------------------------------------
+
+    if(isFALSE(length(initial_capital) == 1) ||
+       is.na(initial_capital) ||
+       initial_capital < 0)
+      errors <- c(errors,
+                  paste0("initial_capital must be a numeric length 1",
+                         " non-negative vector containing no missing values."))
+
+    # check premium_rate
+    #---------------------------------------------------------------------------
+
+    if(isFALSE(length(premium_rate) == 1) ||
+       is.na(premium_rate) ||
+       premium_rate < 0)
+      errors <- c(errors,
+                  paste0("premium_rate must be a numeric length 1",
+                         " non-negative vector containing no missing values."))
+
+
+    # check formal arguments of claim_interarrival_generator and
+    # claim_interarrival_parameters
+    #---------------------------------------------------------------------------
+
+    if(
+      isFALSE(
+        all(
+          names(claim_interarrival_parameters) %in%
+          names(formals(claim_interarrival_generator))
+        )
+      )
+    )
+      errors <- c(errors,
+                  paste0("claim_interarrival_parameters must have the same",
+                         " names as formal argument of",
+                         " claim_interarrival_generator"))
+
+    # check formal arguments of claim_size_generator and claim_size_parameters
+    #---------------------------------------------------------------------------
+
+    if(
+      isFALSE(
+        all(
+          names(claim_size_parameters) %in% names(formals(claim_size_generator))
+        )
+      )
+    )
+      errors <- c(errors,
+                  paste0("claim_size_parameters must have the same names as",
+                         " formal argument of claim_size_generator."))
+
+    # return TRUE if slots are valid, otherwise errors messeges
+    #---------------------------------------------------------------------------
+
+    if(length(errors) == 0) {
+      TRUE
+    } else {
+      errors
+    }
+
+  }
+
+)
+
 #' @export
 SparreAndersen <- function(initial_capital = NULL,
                            premium_rate = NULL,
