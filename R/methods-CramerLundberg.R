@@ -76,9 +76,29 @@ setValidity(
 
 #' Constructs an object of CramerLundberg S4 class
 #'
+#' \code{CramerLundberg()} constructs an object of \code{CramerLundberg} S4
+#' class.
 #'
+#' @param initial_capital a length one numeric non-negative vector specifying an
+#' initial capital. Default: \code{0}.
+#' @param premium_rate a length one numeric non-negative vector specifying a
+#' premium rate. Default: \code{1}.
+#' @param claim_poisson_arrival_rate a length one numeric positive vector
+#' specifying the rate of the Poisson process of claims' arrivals. Default:
+#' \code{1}.
+#' @param claim_size_generator a function indicating the random generator of
+#' claims' sizes. Default: \code{rexp}.
+#' @param claim_size_parameters a named list containing parameters for the
+#' random generator of claims' sizes. Default: \code{list(rate = 1)}.
 #'
+#' @return An object of \code{CramerLundberg} class.
 #'
+#' @examples
+#' model <- CramerLundberg(initial_capital = 10,
+#'                         premium_rate = 1,
+#'                         claim_poisson_arrival_rate = 1,
+#'                         claim_size_generator = rexp,
+#'                         claim_size_parameters = list(rate = 1))
 #'
 #' @export
 CramerLundberg <- function(initial_capital = NULL,

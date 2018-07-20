@@ -33,6 +33,13 @@ the following conditions is met: (1) the process is ruined, (2)
 \code{max_time_horizon} is achieved, (3) the elapsed time of ths simulateion
 is greater than \code{max_simulation_time}.
 }
+\section{Warning}{
+
+Setting both \code{max_time_horizon} and \code{max_simulation_time} to
+\code{Inf} might be dengerous. In this case, the only stopping condition is a
+ruin of the process, which might not happen.
+}
+
 \examples{
 model <- CramerLundberg(initial_capital = 10,
                         premium_rate = 1,

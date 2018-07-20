@@ -20,6 +20,11 @@
 #' \code{CramerLundberg}, the object of class \code{CramerLundbergPath} is
 #' returned.
 #'
+#' @section Warning:
+#' Setting both \code{max_time_horizon} and \code{max_simulation_time} to
+#' \code{Inf} might be dengerous. In this case, the only stopping condition is a
+#' ruin of the process, which might not happen.
+#'
 #' @examples
 #' model <- CramerLundberg(initial_capital = 10,
 #'                         premium_rate = 1,

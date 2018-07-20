@@ -11,8 +11,8 @@ ruin_probability(model, time_horizon, simulation_number = NULL,
 \item{model}{an S4 object indicating a risk model (e.g.,
 \code{\link{CramerLundberg}}).}
 
-\item{time_horizon}{a length one numeric vector specifying the time at which
-the ruin probability should be estimated. Should not be set to \code{Inf}.}
+\item{time_horizon}{a length one numeric finite vector specifying the time at
+which the ruin probability should be estimated.}
 
 \item{simulation_number}{a length one numeric vector giving the number of
 simulations that should be performed. Default: \code{10000}.}
