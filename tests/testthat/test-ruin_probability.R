@@ -59,7 +59,7 @@ for(i in 1:nrow(exact_probabilities)) {
            ". A simulated probability is close to the exact one."),
     expect_true(
       abs(rp$ruin_probability["estimate"] -
-            exact_probabilities[i, "probability"]) < 0.025
+            exact_probabilities[i, "probability"]) < 0.03
     )
   )
 }
@@ -99,7 +99,7 @@ for(i in 1:nrow(exact_probabilities)) {
            ". A simulated probability is close to the exact one."),
     expect_true(
       abs(rp$ruin_probability["estimate"] -
-            exact_probabilities[i, "probability"]) < 0.025
+            exact_probabilities[i, "probability"]) < 0.03
     )
   )
 
@@ -147,7 +147,7 @@ for(i in 1:nrow(exact_probabilities)) {
     initial_capital = exact_probabilities[i, "initial_capital"],
     premium_rate = exact_probabilities[i, "premium_rate"],
     claim_poisson_arrival_rate = 1,
-    claim_size__generator = rexp,
+    claim_size_generator = rexp,
     claim_size_parameters = list(rate = 1),
     capital_injection_poisson_rate = 1,
     capital_injection_size_generator = rexp,
@@ -165,7 +165,7 @@ for(i in 1:nrow(exact_probabilities)) {
            ". A simulated probability is close to the exact one."),
     expect_true(
       abs(rp$ruin_probability["estimate"] -
-            exact_probabilities[i, "probability"]) < 0.025
+            exact_probabilities[i, "probability"]) < 0.03
     )
   )
 

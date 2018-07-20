@@ -74,6 +74,12 @@ setValidity(
 
 )
 
+#' Constructs an object of CramerLundberg S4 class
+#'
+#'
+#'
+#'
+#'
 #' @export
 CramerLundberg <- function(initial_capital = NULL,
                            premium_rate = NULL,
