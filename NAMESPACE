@@ -2,5 +2,6 @@
 
 export(CramerLundberg)
 export(CramerLundbergCapitalInjections)
+export(SparreAndersen)
 export(ruin_probability)
 export(simulate_path)
