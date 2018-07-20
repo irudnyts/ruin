@@ -1,4 +1,4 @@
-#' Estimates a ruin probability for a finite time horizon
+#' Estimate a ruin probability for a finite time horizon
 #'
 #' \code{ruin_probability} simulates paths for a given risk \code{model} and
 #' returns a crude Monte-Carlo estimate of the ruin probability for the finite
@@ -14,9 +14,8 @@
 #'
 #' @param model an S4 object indicating a risk model (e.g.,
 #' \code{\link{CramerLundberg}}).
-#'
 #' @param time_horizon a length one numeric vector specifying the time at which
-#' the ruin probability should be estimated.
+#' the ruin probability should be estimated. Should not be set to \code{Inf}.
 #' @param simulation_number a length one numeric vector giving the number of
 #' simulations that should be performed. Default: \code{10000}.
 #' @param ci_level a length one numeric vector between 0 and 1 indicating the

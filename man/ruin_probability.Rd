@@ -2,7 +2,7 @@
 % Please edit documentation in R/ruin_probability.R
 \name{ruin_probability}
 \alias{ruin_probability}
-\title{Estimates a ruin probability for a finite time horizon}
+\title{Estimate a ruin probability for a finite time horizon}
 \usage{
 ruin_probability(model, time_horizon, simulation_number = NULL,
   ci_level = NULL, parallel = NULL, return_paths = NULL)
@@ -12,7 +12,7 @@ ruin_probability(model, time_horizon, simulation_number = NULL,
 \code{\link{CramerLundberg}}).}
 
 \item{time_horizon}{a length one numeric vector specifying the time at which
-the ruin probability should be estimated.}
+the ruin probability should be estimated. Should not be set to \code{Inf}.}
 
 \item{simulation_number}{a length one numeric vector giving the number of
 simulations that should be performed. Default: \code{10000}.}
