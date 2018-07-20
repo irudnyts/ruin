@@ -1,23 +1,43 @@
+#' Plot a path of the simulated ruin process
+#'
+#' \code{plot_path()} takes a simulated ruin process as the argument and plots
+#' its path.
+#'
+#' Under the hood, the function uses \code{\link{ggplot2}} package, therefore,
+#' all functionality from \code{\link{ggplot2}} is availible.
+#'
+#' @param path_object an S4 object of *Path class (e.g.
+#' \code{\link{CramerLundbergPath}}).
+#'
+#' @return A \code{\link{ggplot2}} object.
+#'
+#' @examples
+#' model <- CramerLundberg(initial_capital = 10,
+#'                         premium_rate = 1,
+#'                         claim_poisson_arrival_rate = 1,
+#'                         claim_size_generator = rexp,
+#'                         claim_size_parameters = list(rate = 1))
+#'
+#' path <- simulate_path(model = model, max_time_horizon = 10)
+#'
+#' plot_path(path)
+#'
 #' @export
 plot_path <- function(path_object) {
 
   # validate arguments
-  #---------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------
 
   stopifnot(
 
-    is(object = path_object,
-       class2 = c("PathCramerLundberg",
-                  "PathCramerLundbergCapitalInjections",
-                  "PathSparreAndersen",
-                  "PathSparreAndersenCapitalInjections")),
+    isS4(path_object),
 
     "path" %in% slotNames(path_object)
 
   )
 
   # plot
-  #---------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------
 
   data <- data.frame(path_object@path)
 
