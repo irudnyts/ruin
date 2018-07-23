@@ -142,7 +142,7 @@ CramerLundbergCapitalInjections <- function(initial_capital = NULL,
     claim_poisson_arrival_rate <- 1
 
   if(is.null(claim_size_generator))
-    claim_size_generator <- rexp
+    claim_size_generator <- stats::rexp
 
   if(is.null(claim_size_parameters))
     claim_size_parameters <- list(rate = 1)
@@ -151,7 +151,7 @@ CramerLundbergCapitalInjections <- function(initial_capital = NULL,
     capital_injection_poisson_rate <- 1
 
   if(is.null(capital_injection_size_generator))
-    capital_injection_size_generator <- rexp
+    capital_injection_size_generator <- stats::rexp
 
   if(is.null(capital_injection_size_parameters))
     capital_injection_size_parameters <- list(rate = 1)
@@ -159,7 +159,7 @@ CramerLundbergCapitalInjections <- function(initial_capital = NULL,
   # generate an object and return it
   #-----------------------------------------------------------------------------
 
-  model <- new(
+  model <- methods::new(
     Class = "CramerLundbergCapitalInjections",
     initial_capital = initial_capital,
     premium_rate = premium_rate,
@@ -270,8 +270,8 @@ setMethod(
     a_pos <- numeric() # arrival times of positive jumps
     a_neg <- numeric() # arrival times of negative jumps
 
-    ca_pos <- rexp(1, lambda_p) # current arrival time of a positive jump
-    ca_neg <- rexp(1, lambda_n) # current arrival time of a negative jump
+    ca_pos <- stats::rexp(1, lambda_p) # current arrival time of a positive jump
+    ca_neg <- stats::rexp(1, lambda_n) # current arrival time of a negative jump
 
     is_ruined <- FALSE
 
@@ -300,7 +300,7 @@ setMethod(
               break
             }
 
-            ca_neg <- ca_neg + rexp(1, lambda_n)
+            ca_neg <- ca_neg + stats::rexp(1, lambda_n)
 
 
           } else if(ca_pos == ca_neg) {
@@ -323,8 +323,8 @@ setMethod(
               break
             }
 
-            ca_pos <- ca_pos + rexp(1, lambda_p)
-            ca_neg <- ca_neg + rexp(1, lambda_n)
+            ca_pos <- ca_pos + stats::rexp(1, lambda_p)
+            ca_neg <- ca_neg + stats::rexp(1, lambda_n)
 
           } else if(ca_pos < ca_neg) {
 
@@ -336,7 +336,7 @@ setMethod(
             s_pos <- c(s_pos, cs_pos)
             a_pos <- c(a_pos, ca_pos)
 
-            ca_pos <- ca_pos + rexp(1, lambda_p)
+            ca_pos <- ca_pos + stats::rexp(1, lambda_p)
 
           }
 

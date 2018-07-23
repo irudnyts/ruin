@@ -155,13 +155,13 @@ SparreAndersen <- function(initial_capital = NULL,
     premium_rate <- 1
 
   if(is.null(claim_interarrival_generator))
-    claim_interarrival_generator <- rexp
+    claim_interarrival_generator <- stats::rexp
 
   if(is.null(claim_interarrival_parameters))
     claim_interarrival_parameters <- list(rate = 1)
 
   if(is.null(claim_size_generator))
-    claim_size_generator <- rexp
+    claim_size_generator <- stats::rexp
 
   if(is.null(claim_size_parameters))
     claim_size_parameters <- list(rate = 1)
@@ -169,7 +169,7 @@ SparreAndersen <- function(initial_capital = NULL,
   # generate an object and return it
   #-----------------------------------------------------------------------------
 
-  model <- new(
+  model <- methods::new(
     Class = "SparreAndersen",
     initial_capital = initial_capital,
     premium_rate = premium_rate,

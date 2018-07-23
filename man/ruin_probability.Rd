@@ -55,6 +55,7 @@ model <- CramerLundberg(initial_capital = 0,
 ruin_probability(model = model,
                  time_horizon = 10,
                  simulation_number = 100,
-                 return_paths = TRUE)
+                 return_paths = TRUE,
+                 parallel = FALSE)
 
 }

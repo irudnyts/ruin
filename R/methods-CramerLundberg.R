@@ -135,7 +135,7 @@ CramerLundberg <- function(initial_capital = NULL,
     claim_poisson_arrival_rate <- 1
 
   if(is.null(claim_size_generator))
-    claim_size_generator <- rexp
+    claim_size_generator <- stats::rexp
 
   if(is.null(claim_size_parameters))
     claim_size_parameters <- list(rate = 1)
@@ -143,7 +143,7 @@ CramerLundberg <- function(initial_capital = NULL,
   # generate an object and return it
   #-----------------------------------------------------------------------------
 
-  model <- new(
+  model <- methods::new(
     Class = "CramerLundberg",
     initial_capital = initial_capital,
     premium_rate = premium_rate,
@@ -245,7 +245,7 @@ setMethod(
 
     a_neg <- numeric() # arrival times of negative jumps
 
-    ca_neg <- rexp(1, lambda) # current arrival time of a negative jump
+    ca_neg <- stats::rexp(1, lambda) # current arrival time of a negative jump
 
     is_ruined <- FALSE
 
@@ -272,7 +272,7 @@ setMethod(
             break
           }
 
-          ca_neg <- ca_neg + rexp(1, lambda)
+          ca_neg <- ca_neg + stats::rexp(1, lambda)
 
         } else {
 

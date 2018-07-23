@@ -159,25 +159,25 @@ SparreAndersenCapitalInjections <- function(
     premium_rate <- 1
 
   if(is.null(claim_interarrival_generator))
-    claim_interarrival_generator <- rexp
+    claim_interarrival_generator <- stats::rexp
 
   if(is.null(claim_interarrival_parameters))
     claim_interarrival_parameters <- list(rate = 1)
 
   if(is.null(claim_size_generator))
-    claim_size_generator <- rexp
+    claim_size_generator <- stats::rexp
 
   if(is.null(claim_size_parameters))
     claim_size_parameters <- list(rate = 1)
 
   if(is.null(capital_injection_interarrival_generator))
-    capital_injection_interarrival_generator <- rexp
+    capital_injection_interarrival_generator <- stats::rexp
 
   if(is.null(capital_injection_interarrival_parameters))
     capital_injection_interarrival_parameters <- list(rate = 1)
 
   if(is.null(capital_injection_size_generator))
-    capital_injection_size_generator <- rexp
+    capital_injection_size_generator <- stats::rexp
 
   if(is.null(capital_injection_size_parameters))
     capital_injection_size_parameters <- list(rate = 1)
@@ -185,7 +185,7 @@ SparreAndersenCapitalInjections <- function(
   # generate an object and return it
   #-----------------------------------------------------------------------------
 
-  model <- new(
+  model <- methods::new(
     Class = "SparreAndersenCapitalInjections",
     initial_capital = initial_capital,
     premium_rate = premium_rate,
