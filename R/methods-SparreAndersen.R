@@ -334,7 +334,7 @@ setMethod(
                                         units = "secs"))
 
     # generate a returning object
-    process <- new(
+    process <- methods::new(
       Class = "PathSparreAndersen",
       model = model,
       path = path,

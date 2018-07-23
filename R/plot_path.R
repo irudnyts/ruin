@@ -32,7 +32,7 @@ plot_path <- function(path_object) {
 
     isS4(path_object),
 
-    "path" %in% slotNames(path_object)
+    "path" %in% methods::slotNames(path_object)
 
   )
 

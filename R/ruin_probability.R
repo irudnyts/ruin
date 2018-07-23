@@ -175,9 +175,9 @@ ruin_probability <- function(model,
   ruined <- sapply(processes, function(prc) prc@is_ruined)
 
   p <- mean(ruined)
-  std <- sd(ruined)
+  std <- stats::sd(ruined)
 
-  z <- qnorm(0.5 + ci_level / 2)
+  z <- stats::qnorm(0.5 + ci_level / 2)
 
   rval <- list()
 
