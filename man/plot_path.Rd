@@ -8,7 +8,7 @@ plot_path(path_object)
 }
 \arguments{
 \item{path_object}{an S4 object of *Path class (e.g.,
-\code{\link{CramerLundbergPath}}).}
+\linkS4class{PathCramerLundberg}).}
 }
 \value{
 A \code{\link{ggplot2}} object.

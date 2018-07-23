@@ -6,7 +6,7 @@
 #' is greater than \code{max_simulation_time}.
 #'
 #' @param model an S4 object indicating a risk model (e.g.,
-#' \code{\link{CramerLundberg}}).
+#' \linkS4class{CramerLundberg}).
 #' @param max_time_horizon a length one numeric vector specifying the maximum
 #' time horizon, until with the process will be simulated. Default: \code{Inf}.
 #' @param max_simulation_time a length one numeric vector indicating the maximum
@@ -17,8 +17,8 @@
 #' value.
 #'
 #' @return An S4 corresponding to \code{model} class object. For instance, for
-#' \code{CramerLundberg}, the object of class \code{CramerLundbergPath} is
-#' returned.
+#' \linkS4class{CramerLundberg}, the object of class
+#' \linkS4class{PathCramerLundberg} is returned.
 #'
 #' @section Warning:
 #' Setting both \code{max_time_horizon} and \code{max_simulation_time} to

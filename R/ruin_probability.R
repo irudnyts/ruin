@@ -13,7 +13,7 @@
 #' probability (thanks to CLT).
 #'
 #' @param model an S4 object indicating a risk model (e.g.,
-#' \code{\link{CramerLundberg}}).
+#' \linkS4class{CramerLundberg}).
 #' @param time_horizon a length one numeric finite vector specifying the time at
 #' which the ruin probability should be estimated.
 #' @param simulation_number a length one numeric vector giving the number of

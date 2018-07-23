@@ -7,7 +7,7 @@
 #' all functionality from \code{\link{ggplot2}} is availible.
 #'
 #' @param path_object an S4 object of *Path class (e.g.,
-#' \code{\link{CramerLundbergPath}}).
+#' \linkS4class{PathCramerLundberg}).
 #'
 #' @return A \code{\link{ggplot2}} object.
 #'

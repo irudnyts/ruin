@@ -2,6 +2,7 @@
 #' @include AllGeneric.R
 NULL
 
+
 setValidity(
   Class = "SparreAndersen",
   method = function(object) {
@@ -82,6 +83,7 @@ setValidity(
   }
 
 )
+
 
 #' Constructs an object of SparreAndersen S4 class
 #'
@@ -183,6 +185,40 @@ SparreAndersen <- function(initial_capital = NULL,
 
 }
 
+
+#' Simulates a path of a Sparre Andersen model
+#'
+#' \code{simulate_path()} simulates a path of \linkS4class{SparreAndersen}
+#' model until one of the following conditions is met: (1) the process is
+#' ruined, (2) \code{max_time_horizon} is achieved, (3) the elapsed time of ths
+#' simulateion is greater than \code{max_simulation_time}.
+#'
+#' @param model an S4 object of \linkS4class{SparreAndersen} class.
+#' @param max_time_horizon a length one numeric vector specifying the maximum
+#' time horizon, until with the process will be simulated. Default: \code{Inf}.
+#' @param max_simulation_time a length one numeric vector indicating the maximum
+#' allowed time of simutaion. The value should be specified in seconds. Default:
+#' \code{Inf}.
+#' @param seed an optional arbitrary length numeric vector specifying the seed.
+#' If provided, the \code{.Random.seed} in \code{.GlobalEnv} is set to its
+#' value.
+#'
+#' @return \linkS4class{PathSparreAndersen}
+#'
+#' @section Warning:
+#' Setting both \code{max_time_horizon} and \code{max_simulation_time} to
+#' \code{Inf} might be dengerous. In this case, the only stopping condition is a
+#' ruin of the process, which might not happen.
+#'
+#' @examples
+#' model <- SparreAndersen(initial_capital = 10,
+#'                         premium_rate = 1,
+#'                         claim_interarrival_generator = rexp,
+#'                         claim_interarrival_parameters = list(rate = 2),
+#'                         claim_size_generator = rexp,
+#'                         claim_size_parameters = list(rate = 1))
+#'
+#' path <- simulate_path(model = model, max_time_horizon = 10)
 setMethod(
   f = "simulate_path",
   signature = c(model = "SparreAndersen"),

@@ -1,6 +1,7 @@
 #-------------------------------------------------------------------------------
 # CramerLundberg classes
 
+
 #' A formal S4 class CramerLundberg
 #'
 #' A formal S4 class representation of classical Cramer-Lundberg model.
@@ -42,6 +43,7 @@ setClass(
   )
 )
 
+
 #' A formal S4 class PathCramerLundberg
 #'
 #' A formal S4 class to contain a simulated path of
@@ -82,6 +84,7 @@ setClass(
     seed = "integer"
   )
 )
+
 
 #-------------------------------------------------------------------------------
 # CramerLundbergCapitalInjections classes
@@ -140,6 +143,7 @@ setClass(
   )
 )
 
+
 #' A formal S4 class PathCramerLundbergCapitalInjections
 #'
 #' A formal S4 class to contain a simulated path of
@@ -186,8 +190,10 @@ setClass(
   )
 )
 
+
 #-------------------------------------------------------------------------------
 # SparreAndersen classes
+
 
 #' A formal S4 class SparreAndersen
 #'
@@ -280,8 +286,10 @@ setClass(
   )
 )
 
+
 #-------------------------------------------------------------------------------
 # SparreAndersenCapitalInjections classes
+
 
 #' A formal S4 class SparreAndersenCapitalInjections
 #'
@@ -344,6 +352,7 @@ setClass(
     capital_injection_size_parameters = "list"
   )
 )
+
 
 #' A formal S4 class PathSparreAndersenCapitalInjections
 #'

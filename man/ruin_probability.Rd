@@ -9,7 +9,7 @@ ruin_probability(model, time_horizon, simulation_number = NULL,
 }
 \arguments{
 \item{model}{an S4 object indicating a risk model (e.g.,
-\code{\link{CramerLundberg}}).}
+\linkS4class{CramerLundberg}).}
 
 \item{time_horizon}{a length one numeric finite vector specifying the time at
 which the ruin probability should be estimated.}
