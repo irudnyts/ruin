@@ -15,8 +15,8 @@ simulate_path(model, max_time_horizon = NULL, max_simulation_time = NULL,
 time horizon, until with the process will be simulated. Default: \code{Inf}.}
 
 \item{max_simulation_time}{a length one numeric vector indicating the maximum
-allowed time of simutaion. The value should be specified in seconds. Default:
-\code{Inf}.}
+allowed time of simulation. The value should be specified in seconds.
+Default: \code{Inf}.}
 
 \item{seed}{an optional arbitrary length numeric vector specifying the seed.
 If provided, the \code{.Random.seed} in \code{.GlobalEnv} is set to its
@@ -30,7 +30,7 @@ An S4 corresponding to \code{model} class object. For instance, for
 \description{
 \code{simulate_path()} simulates a path of a given risk model until one of
 the following conditions is met: (1) the process is ruined, (2)
-\code{max_time_horizon} is achieved, (3) the elapsed time of ths simulateion
+\code{max_time_horizon} is achieved, (3) the elapsed time of the simulation
 is greater than \code{max_simulation_time}.
 }
 \section{Warning}{

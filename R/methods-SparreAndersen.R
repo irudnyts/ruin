@@ -91,7 +91,7 @@ setValidity(
 #' class.
 #'
 #' The function constructs an object of a formal S4 class
-#' \code{SparreAndersen}, a representation of an extenssion of
+#' \code{SparreAndersen}, a representation of an extension of
 #' Cramer-Lundberg model that allows for non-exponential interarrival times and
 #' defined as follows:
 #' \deqn{X(t) = u + ct - \sum_{i=1}^{N(t)} Y_i,}
