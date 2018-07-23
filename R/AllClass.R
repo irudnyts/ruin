@@ -1,6 +1,36 @@
 #-------------------------------------------------------------------------------
 # CramerLundberg classes
 
+#' A formal S4 class CramerLundberg
+#'
+#' A formal S4 class representation of classical Cramer-Lundberg model.
+#'
+#' The model is defined as follows:
+#' \deqn{X(t) = u + ct - \sum_{i=1}^{N(t)} Y_i,}
+#' where \eqn{u} is the initial capital (\code{initial_capital}), \eqn{c} is the
+#' premium rate (\code{premium_rate}), \eqn{N(t)} is the Poisson process with
+#' intencity \eqn{\lambda} (\code{claim_poisson_arrival_rate}), \eqn{Y_i} are
+#' iid claim sizes (\code{claim_size_generator} and \code{claim_size_parameters}
+#' ).
+#'
+#' Objects of class can be created only by using the constructor
+#' \code{\link{CramerLundberg}}.
+#'
+#' @slot initial_capital a length one numeric non-negative vector specifying an
+#' initial capital.
+#' @slot premium_rate a length one numeric non-negative vector specifying a
+#' premium rate.
+#' @slot claim_poisson_arrival_rate a length one numeric positive vector
+#' specifying the rate of the Poisson process of claims' arrivals.
+#' @slot claim_size_generator a function indicating the random generator of
+#' claims' sizes.
+#' @slot claim_size_parameters a named list containing parameters for the
+#' random generator of claims' sizes.
+#'
+#' @seealso \code{\link{CramerLundberg}}
+#'
+#' @references
+#' Albrecher H., Asmussen A. \emph{Ruin Probabilities}. World Scientific, 2010.
 setClass(
   Class = "CramerLundberg",
   slots = list(
