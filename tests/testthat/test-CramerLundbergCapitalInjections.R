@@ -1,8 +1,6 @@
 context("CramerLundberg")
 
-skip_on_appveyor()
-skip_on_travis()
-skip_on_cran()
+skip("Tests take too much time to simulate.")
 
 # ruin_probability()
 #-------------------------------------------------------------------------------
