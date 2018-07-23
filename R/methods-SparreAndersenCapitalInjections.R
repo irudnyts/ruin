@@ -63,6 +63,78 @@ setValidity(
 
 )
 
+#' Constructs an object of SparreAndersenCapitalInjections S4 class
+#'
+#' \code{SparreAndersenCapitalInjections()} constructs an object of
+#' \code{SparreAndersenCapitalInjections} S4 class.
+#'
+#' The function constructs an object of a formal S4 class
+#' \code{SparreAndersenCapitalInjections}, a representation of an extenssion of
+#' Sparre Andersen model that allows for positive jumps and defined as follows:
+#' \deqn{X_(t) = u + ct + \sum_{k=1}^{N^{(+)}(t)} Y^{(+)}_k -
+#' \sum_{i=1}^{N^{(-)}(t)} Y^{(-)}_i}
+#' where \eqn{u} is the initial capital (\code{initial_capital}), \eqn{c} is the
+#' premium rate (\code{premium_rate}), \eqn{N^{(+)}(t)} is the renewal process
+#' of positive jumps (capital injections) defined by distribution of
+#' interarrival times (\code{capital_injection_interarrival_generator} and
+#' \code{capital_injection_interarrival_parameters}), \eqn{Y^{(+)}_k} are iid
+#' capital injections' sizes (\code{capital_injection_size_generator}
+#' and \code{capital_injection_size_parameters}), \eqn{N^{(-)}(t)} is the
+#' renewal process of claims defined by distribution of interarrival times
+#' (\code{claim_interarrival_generator} and
+#' \code{claim_interarrival_parameters}), \eqn{Y^{(-)}_i} are iid claim sizes
+#' (\code{claim_size_generator} and \code{claim_size_parameters}).
+#'
+#' @param initial_capital a length one numeric non-negative vector specifying an
+#' initial capital. Default: \code{0}.
+#' @param premium_rate a length one numeric non-negative vector specifying a
+#' premium rate. Default: \code{1}.
+#' @param claim_interarrival_generator a function indicating the random
+#' generator of claims' interarrival times. Default: \code{rexp}.
+#' @param claim_interarrival_parameters a named list containing parameters for
+#' the random generator of claims' interarrival times. Default:
+#' \code{list(rate = 1)}.
+#' @param claim_size_generator a function indicating the random generator of
+#' claims' sizes. Default: \code{rexp}.
+#' @param claim_size_parameters a named list containing parameters for the
+#' random generator of claims' sizes. Default: \code{list(rate = 1)}.
+#' @param capital_injection_interarrival_generator a function indicating
+#' the random generator of capital injections' interarrival times. Default:
+#' \code{rexp}.
+#' @param capital_injection_interarrival_parameters a named list containing
+#' parameters for the random generator of capital injections' interarrival
+#' times. Default: \code{list(rate = 1)}.
+#' @param capital_injection_size_generator a function indicating the random
+#' generator of capital injections' sizes. Default: \code{rexp}.
+#' @param capital_injection_size_parameters a named list containing parameters
+#' for the random generator of capital injections' sizes. Default:
+#' \code{list(rate = 1)}.
+#'
+#' @return An object of \code{SparreAndersenCapitalInjections} class.
+#'
+#' @seealso \code{\link{CramerLundberg}},
+#' \code{\link{CramerLundbergCapitalInjections}},
+#' \code{link{SparreAndersen}}.
+#'
+#' @references
+#' Breuera L., Badescu A. L. \emph{A generalised Gerber Shiu measure for
+#' Markov-additive risk processes with phase-type claims and capital
+#' injections}. Scandinavian Actuarial Journal, 2014(2): 93-115, 2014.
+#'
+#' @examples
+#' model <- SparreAndersenCapitalInjections(
+#'   initial_capital = 10,
+#'   premium_rate = 1,
+#'   claim_interarrival_generator = rexp,
+#'   claim_interarrival_parameters = list(rate = 1),
+#'   claim_size_generator = rexp,
+#'   claim_size_parameters = list(rate = 1),
+#'   capital_injection_interarrival_generator = rexp,
+#'   capital_injection_interarrival_parameters = list(rate = 1),
+#'   capital_injection_size_generator = rexp,
+#'   capital_injection_size_parameters = list(rate = 1)
+#' )
+#'
 #' @export
 SparreAndersenCapitalInjections <- function(
   initial_capital = NULL,

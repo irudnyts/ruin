@@ -74,6 +74,11 @@ model <- CramerLundbergCapitalInjections(
 )
 
 }
+\references{
+Breuera L., Badescu A. L. \emph{A generalised Gerber Shiu measure for
+Markov-additive risk processes with phase-type claims and capital
+injections}. Scandinavian Actuarial Journal, 2014(2): 93-115, 2014.
+}
 \seealso{
 \code{\link{CramerLundberg}},
 \code{\link{SparreAndersen}}, \code{link{SparreAndersenCapitalInjections}}.

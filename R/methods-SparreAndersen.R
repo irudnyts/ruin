@@ -96,7 +96,7 @@ setValidity(
 #' where \eqn{u} is the initial capital (\code{initial_capital}), \eqn{c} is the
 #' premium rate (\code{premium_rate}), \eqn{N(t)} is the renewal process defined
 #' by distribution of interarrival times (\code{claim_interarrival_generator}
-#' and \code{claim_interarrival_parameters} ), \eqn{Y_i} are iid claim sizes
+#' and \code{claim_interarrival_parameters}), \eqn{Y_i} are iid claim sizes
 #' (\code{claim_size_generator} and \code{claim_size_parameters}).
 #'
 #' @param initial_capital a length one numeric non-negative vector specifying an
@@ -121,10 +121,10 @@ setValidity(
 #'
 #' @references \itemize{
 #' \item Andersen, E. Sparre. \emph{On the collective theory of risk in case of
-#' contagion between claims.}. Transactions of the XVth International Congress
+#' contagion between claims}. Transactions of the XVth International Congress
 #' of Actuaries, 2(6), 1957.
 #' \item Thorin O. \emph{Some Comments on the Sparre Andersen Model in the Risk
-#' Theory.}. ASTIN Bulletin: The Journal of the IAA, 8(1):104-125, 1974.
+#' Theory}. ASTIN Bulletin: The Journal of the IAA, 8(1):104-125, 1974.
 #' }
 #'
 #' @examples

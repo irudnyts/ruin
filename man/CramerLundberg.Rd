@@ -50,6 +50,9 @@ model <- CramerLundberg(initial_capital = 10,
                         claim_size_parameters = list(rate = 1))
 
 }
+\references{
+Albrecher H., Asmussen A. \emph{Ruin Probabilities}. World Scientific, 2010.
+}
 \seealso{
 \code{\link{CramerLundbergCapitalInjections}},
 \code{\link{SparreAndersen}}, \code{link{SparreAndersenCapitalInjections}}.

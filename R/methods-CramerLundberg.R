@@ -105,6 +105,9 @@ setValidity(
 #' @seealso \code{\link{CramerLundbergCapitalInjections}},
 #' \code{\link{SparreAndersen}}, \code{link{SparreAndersenCapitalInjections}}.
 #'
+#' @references
+#' Albrecher H., Asmussen A. \emph{Ruin Probabilities}. World Scientific, 2010.
+#'
 #' @examples
 #' model <- CramerLundberg(initial_capital = 10,
 #'                         premium_rate = 1,
