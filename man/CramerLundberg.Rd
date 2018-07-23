@@ -26,7 +26,7 @@ claims' sizes. Default: \code{rexp}.}
 random generator of claims' sizes. Default: \code{list(rate = 1)}.}
 }
 \value{
-An object of \code{CramerLundberg} class.
+An object of \linkS4class{CramerLundberg} class.
 }
 \description{
 \code{CramerLundberg()} constructs an object of \code{CramerLundberg} S4

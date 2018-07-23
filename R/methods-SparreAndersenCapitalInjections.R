@@ -110,7 +110,7 @@ setValidity(
 #' for the random generator of capital injections' sizes. Default:
 #' \code{list(rate = 1)}.
 #'
-#' @return An object of \code{SparreAndersenCapitalInjections} class.
+#' @return An object of \linkS4class{SparreAndersenCapitalInjections} class.
 #'
 #' @seealso \code{\link{CramerLundberg}},
 #' \code{\link{CramerLundbergCapitalInjections}},

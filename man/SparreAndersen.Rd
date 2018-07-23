@@ -29,7 +29,7 @@ claims' sizes. Default: \code{rexp}.}
 random generator of claims' sizes. Default: \code{list(rate = 1)}.}
 }
 \value{
-An object of \code{SparreAndersen} class.
+An object of \linkS4class{SparreAndersen} class.
 }
 \description{
 \code{SparreAndersen()} constructs an object of \code{SparreAndersen} S4

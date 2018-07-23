@@ -113,7 +113,7 @@ setValidity(
 #' @param claim_size_parameters a named list containing parameters for the
 #' random generator of claims' sizes. Default: \code{list(rate = 1)}.
 #'
-#' @return An object of \code{SparreAndersen} class.
+#' @return An object of \linkS4class{SparreAndersen} class.
 #'
 #' @seealso \code{\link{CramerLundberg}},
 #' \code{\link{CramerLundbergCapitalInjections}},

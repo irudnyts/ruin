@@ -42,6 +42,31 @@ setClass(
   )
 )
 
+#' A formal S4 class PathCramerLundberg
+#'
+#' A formal S4 class to contain a simulated path of
+#' \linkS4class{CramerLundberg} model.
+#'
+#' Objects of the class must not be created manually. Instead, objects of this
+#' class are returned by \code{\link{simulate_path}}.
+#'
+#' @slot model an object of \linkS4class{CramerLundberg} class.
+#' @slot path a numeric matrix of columns \code{"time"} and \code{"X"} defining
+#' the simulated path represented by pairs time-value.
+#' @slot claim_sizes a numeric vector of claims' sizes.
+#' @slot claim_arrival_times a numeric vector of claims' interarrival times.
+#' @slot time_horizon a numeric vector of the maximum time horizon achieved.
+#' @slot is_ruined a logical vactor indicating whether the process is ruined.
+#' @slot elapsed_time a numeric vector of the elapsed simulation time in
+#' seconds.
+#' @slot max_time_horizon a numeric vector of the maximum time horizon allowed.
+#' @slot max_simulation_time a numeric vector of the maximum simulation time
+#' in seconds.
+#' @slot seed a numeric vector idnicating the seed used for simulation.
+#'
+#'
+#' @seealso \linkS4class{CramerLundberg} (class definition),
+#' \code{\link{CramerLundberg}} (constructor).
 setClass(
   Class = "PathCramerLundberg",
   slots = list(
@@ -115,6 +140,34 @@ setClass(
   )
 )
 
+#' A formal S4 class PathCramerLundbergCapitalInjections
+#'
+#' A formal S4 class to contain a simulated path of
+#' \linkS4class{CramerLundbergCapitalInjections} model.
+#'
+#' Objects of the class must not be created manually. Instead, objects of this
+#' class are returned by \code{\link{simulate_path}}.
+#'
+#' @slot model an object of \linkS4class{CramerLundbergCapitalInjections} class.
+#' @slot path a numeric matrix of columns \code{"time"} and \code{"X"} defining
+#' the simulated path represented by pairs time-value.
+#' @slot claim_sizes a numeric vector of claims' sizes.
+#' @slot claim_arrival_times a numeric vector of claims' interarrival times.
+#' @slot capital_injection_sizes a numeric vector of capital injections' sizes.
+#' @slot capital_injection_arrival_times a numeric vector of capital injections'
+#' interarrival times.
+#' @slot time_horizon a numeric vector of the maximum time horizon achieved.
+#' @slot is_ruined a logical vactor indicating whether the process is ruined.
+#' @slot elapsed_time a numeric vector of the elapsed simulation time in
+#' seconds.
+#' @slot max_time_horizon a numeric vector of the maximum time horizon allowed.
+#' @slot max_simulation_time a numeric vector of the maximum simulation time
+#' in seconds.
+#' @slot seed a numeric vector idnicating the seed used for simulation.
+#'
+#'
+#' @seealso \linkS4class{CramerLundbergCapitalInjections} (class definition),
+#' \code{\link{CramerLundbergCapitalInjections}} (constructor).
 setClass(
   Class = "PathCramerLundbergCapitalInjections",
   slots = list(
@@ -185,6 +238,32 @@ setClass(
   )
 )
 
+
+#' A formal S4 class PathSparreAndersen
+#'
+#' A formal S4 class to contain a simulated path of
+#' \linkS4class{SparreAndersen} model.
+#'
+#' Objects of the class must not be created manually. Instead, objects of this
+#' class are returned by \code{\link{simulate_path}}.
+#'
+#' @slot model an object of \linkS4class{CramerLundberg} class.
+#' @slot path a numeric matrix of columns \code{"time"} and \code{"X"} defining
+#' the simulated path represented by pairs time-value.
+#' @slot claim_sizes a numeric vector of claims' sizes.
+#' @slot claim_arrival_times a numeric vector of claims' interarrival times.
+#' @slot time_horizon a numeric vector of the maximum time horizon achieved.
+#' @slot is_ruined a logical vactor indicating whether the process is ruined.
+#' @slot elapsed_time a numeric vector of the elapsed simulation time in
+#' seconds.
+#' @slot max_time_horizon a numeric vector of the maximum time horizon allowed.
+#' @slot max_simulation_time a numeric vector of the maximum simulation time
+#' in seconds.
+#' @slot seed a numeric vector idnicating the seed used for simulation.
+#'
+#'
+#' @seealso \linkS4class{SparreAndersen} (class definition),
+#' \code{\link{SparreAndersen}} (constructor).
 setClass(
   Class = "PathSparreAndersen",
   slots = list(
@@ -266,6 +345,34 @@ setClass(
   )
 )
 
+#' A formal S4 class PathSparreAndersenCapitalInjections
+#'
+#' A formal S4 class to contain a simulated path of
+#' \linkS4class{SparreAndersenCapitalInjections} model.
+#'
+#' Objects of the class must not be created manually. Instead, objects of this
+#' class are returned by \code{\link{simulate_path}}.
+#'
+#' @slot model an object of \linkS4class{SparreAndersenCapitalInjections} class.
+#' @slot path a numeric matrix of columns \code{"time"} and \code{"X"} defining
+#' the simulated path represented by pairs time-value.
+#' @slot claim_sizes a numeric vector of claims' sizes.
+#' @slot claim_arrival_times a numeric vector of claims' interarrival times.
+#' @slot capital_injection_sizes a numeric vector of capital injections' sizes.
+#' @slot capital_injection_arrival_times a numeric vector of capital injections'
+#' interarrival times.
+#' @slot time_horizon a numeric vector of the maximum time horizon achieved.
+#' @slot is_ruined a logical vactor indicating whether the process is ruined.
+#' @slot elapsed_time a numeric vector of the elapsed simulation time in
+#' seconds.
+#' @slot max_time_horizon a numeric vector of the maximum time horizon allowed.
+#' @slot max_simulation_time a numeric vector of the maximum simulation time
+#' in seconds.
+#' @slot seed a numeric vector idnicating the seed used for simulation.
+#'
+#'
+#' @seealso \linkS4class{SparreAndersenCapitalInjections} (class definition),
+#' \code{\link{SparreAndersenCapitalInjections}} (constructor).
 setClass(
   Class = "PathSparreAndersenCapitalInjections",
   slots = list(

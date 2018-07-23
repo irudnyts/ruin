@@ -48,7 +48,7 @@ for the random generator of capital injections' sizes. Default:
 \code{list(rate = 1)}.}
 }
 \value{
-An object of \code{SparreAndersenCapitalInjections} class.
+An object of \linkS4class{SparreAndersenCapitalInjections} class.
 }
 \description{
 \code{SparreAndersenCapitalInjections()} constructs an object of

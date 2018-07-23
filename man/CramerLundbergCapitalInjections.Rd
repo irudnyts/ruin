@@ -39,7 +39,7 @@ for the random generator of capital injections' sizes. Default:
 \code{list(rate = 1)}.}
 }
 \value{
-An object of \code{CramerLundbergCapitalInjections} class.
+An object of \linkS4class{CramerLundbergCapitalInjections} class.
 }
 \description{
 \code{CramerLundbergCapitalInjections()} constructs an object of
