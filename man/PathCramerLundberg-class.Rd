@@ -26,7 +26,7 @@ the simulated path represented by pairs time-value.}
 
 \item{\code{time_horizon}}{a numeric vector of the maximum time horizon achieved.}
 
-\item{\code{is_ruined}}{a logical vactor indicating whether the process is ruined.}
+\item{\code{is_ruined}}{a logical vector indicating whether the process is ruined.}
 
 \item{\code{elapsed_time}}{a numeric vector of the elapsed simulation time in
 seconds.}
@@ -36,7 +36,7 @@ seconds.}
 \item{\code{max_simulation_time}}{a numeric vector of the maximum simulation time
 in seconds.}
 
-\item{\code{seed}}{a numeric vector idnicating the seed used for simulation.}
+\item{\code{seed}}{a numeric vector indicating the seed used for simulation.}
 }}
 
 \seealso{

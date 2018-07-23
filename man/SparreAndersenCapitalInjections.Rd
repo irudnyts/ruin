@@ -56,7 +56,7 @@ An object of \linkS4class{SparreAndersenCapitalInjections} class.
 }
 \details{
 The function constructs an object of a formal S4 class
-\code{SparreAndersenCapitalInjections}, a representation of an extenssion of
+\code{SparreAndersenCapitalInjections}, a representation of an extension of
 Sparre Andersen model that allows for positive jumps and defined as follows:
 \deqn{X_(t) = u + ct + \sum_{k=1}^{N^{(+)}(t)} Y^{(+)}_k -
 \sum_{i=1}^{N^{(-)}(t)} Y^{(-)}_i}

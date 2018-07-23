@@ -19,7 +19,7 @@ its path.
 }
 \details{
 Under the hood, the function uses \code{\link{ggplot2}} package, therefore,
-all functionality from \code{\link{ggplot2}} is availible.
+all functionality from \code{\link{ggplot2}} is available.
 }
 \examples{
 model <- CramerLundberg(initial_capital = 10,

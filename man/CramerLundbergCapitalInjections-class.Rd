@@ -5,7 +5,7 @@
 \alias{CramerLundbergCapitalInjections-class}
 \title{A formal S4 class CramerLundbergCapitalInjections}
 \description{
-A formal S4 class representation of Cramer-Lundberg's extenssion that
+A formal S4 class representation of Cramer-Lundberg's extension that
 includes capital injections.
 }
 \details{

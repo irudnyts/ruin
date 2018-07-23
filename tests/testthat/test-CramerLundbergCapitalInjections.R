@@ -37,8 +37,9 @@ for(i in 1:nrow(exact_probabilities)) {
            ", premium_rate: ", exact_probabilities[i, "premium_rate"],
            ", time_horizon: ", exact_probabilities[i, "time_horizon"],
            ". A simulated probability is close to the exact one."),
-    skip_on_cran(),
-    skip_on_travis(),
+    skip(),
+    # skip_on_cran(),
+    # skip_on_travis(),
     expect_true(
       abs(rp$ruin_probability["estimate"] -
             exact_probabilities[i, "probability"]) < 0.025

@@ -58,13 +58,13 @@ setClass(
 #' @slot claim_sizes a numeric vector of claims' sizes.
 #' @slot claim_arrival_times a numeric vector of claims' interarrival times.
 #' @slot time_horizon a numeric vector of the maximum time horizon achieved.
-#' @slot is_ruined a logical vactor indicating whether the process is ruined.
+#' @slot is_ruined a logical vector indicating whether the process is ruined.
 #' @slot elapsed_time a numeric vector of the elapsed simulation time in
 #' seconds.
 #' @slot max_time_horizon a numeric vector of the maximum time horizon allowed.
 #' @slot max_simulation_time a numeric vector of the maximum simulation time
 #' in seconds.
-#' @slot seed a numeric vector idnicating the seed used for simulation.
+#' @slot seed a numeric vector indicating the seed used for simulation.
 #'
 #'
 #' @seealso \linkS4class{CramerLundberg} (class definition),
@@ -91,7 +91,7 @@ setClass(
 
 #' A formal S4 class CramerLundbergCapitalInjections
 #'
-#' A formal S4 class representation of Cramer-Lundberg's extenssion that
+#' A formal S4 class representation of Cramer-Lundberg's extension that
 #' includes capital injections.
 #'
 #' The model is defined as follows:
@@ -161,13 +161,13 @@ setClass(
 #' @slot capital_injection_arrival_times a numeric vector of capital injections'
 #' interarrival times.
 #' @slot time_horizon a numeric vector of the maximum time horizon achieved.
-#' @slot is_ruined a logical vactor indicating whether the process is ruined.
+#' @slot is_ruined a logical vector indicating whether the process is ruined.
 #' @slot elapsed_time a numeric vector of the elapsed simulation time in
 #' seconds.
 #' @slot max_time_horizon a numeric vector of the maximum time horizon allowed.
 #' @slot max_simulation_time a numeric vector of the maximum simulation time
 #' in seconds.
-#' @slot seed a numeric vector idnicating the seed used for simulation.
+#' @slot seed a numeric vector indicating the seed used for simulation.
 #'
 #'
 #' @seealso \linkS4class{CramerLundbergCapitalInjections} (class definition),
@@ -259,13 +259,13 @@ setClass(
 #' @slot claim_sizes a numeric vector of claims' sizes.
 #' @slot claim_arrival_times a numeric vector of claims' interarrival times.
 #' @slot time_horizon a numeric vector of the maximum time horizon achieved.
-#' @slot is_ruined a logical vactor indicating whether the process is ruined.
+#' @slot is_ruined a logical vector indicating whether the process is ruined.
 #' @slot elapsed_time a numeric vector of the elapsed simulation time in
 #' seconds.
 #' @slot max_time_horizon a numeric vector of the maximum time horizon allowed.
 #' @slot max_simulation_time a numeric vector of the maximum simulation time
 #' in seconds.
-#' @slot seed a numeric vector idnicating the seed used for simulation.
+#' @slot seed a numeric vector indicating the seed used for simulation.
 #'
 #'
 #' @seealso \linkS4class{SparreAndersen} (class definition),
@@ -293,7 +293,7 @@ setClass(
 
 #' A formal S4 class SparreAndersenCapitalInjections
 #'
-#' A formal S4 class representation of Sparre Andersen's extenssion that
+#' A formal S4 class representation of Sparre Andersen's extension that
 #' includes capital injections.
 #'
 #' The model is defined as follows:
@@ -371,13 +371,13 @@ setClass(
 #' @slot capital_injection_arrival_times a numeric vector of capital injections'
 #' interarrival times.
 #' @slot time_horizon a numeric vector of the maximum time horizon achieved.
-#' @slot is_ruined a logical vactor indicating whether the process is ruined.
+#' @slot is_ruined a logical vector indicating whether the process is ruined.
 #' @slot elapsed_time a numeric vector of the elapsed simulation time in
 #' seconds.
 #' @slot max_time_horizon a numeric vector of the maximum time horizon allowed.
 #' @slot max_simulation_time a numeric vector of the maximum simulation time
 #' in seconds.
-#' @slot seed a numeric vector idnicating the seed used for simulation.
+#' @slot seed a numeric vector indicating the seed used for simulation.
 #'
 #'
 #' @seealso \linkS4class{SparreAndersenCapitalInjections} (class definition),

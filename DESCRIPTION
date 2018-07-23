@@ -13,7 +13,7 @@ Description: A (not yet exhaustive) collection of common models of risk
     two classical risk models Cramer-Lundberg and Sparre Andersen models by
     including capital injections (positive jumps). The intent of the package is
     to provide a user-friendly interface for ruin processes' simulators, as well
-    as a solid and extenssible structure for future extenssions.
+    as a solid and extensible structure for future extensions.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

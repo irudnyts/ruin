@@ -3,7 +3,7 @@
 \docType{methods}
 \name{simulate_path,SparreAndersenCapitalInjections-method}
 \alias{simulate_path,SparreAndersenCapitalInjections-method}
-\title{Simulates a path of a Sparre Andersen model's extenssion with capital
+\title{Simulates a path of a Sparre Andersen model's extension with capital
 injections}
 \usage{
 \S4method{simulate_path}{SparreAndersenCapitalInjections}(model,
@@ -17,8 +17,8 @@ class.}
 time horizon, until with the process will be simulated. Default: \code{Inf}.}
 
 \item{max_simulation_time}{a length one numeric vector indicating the maximum
-allowed time of simutaion. The value should be specified in seconds. Default:
-\code{Inf}.}
+allowed time of simulation. The value should be specified in seconds.
+Default: \code{Inf}.}
 
 \item{seed}{an optional arbitrary length numeric vector specifying the seed.
 If provided, the \code{.Random.seed} in \code{.GlobalEnv} is set to its
@@ -31,13 +31,13 @@ value.}
 \code{simulate_path()} simulates a path of
 \linkS4class{SparreAndersenCapitalInjections} model until one of the
 following conditions is met: (1) the process is ruined, (2)
-\code{max_time_horizon} is achieved, (3) the elapsed time of ths simulateion
+\code{max_time_horizon} is achieved, (3) the elapsed time of the simulation
 is greater than \code{max_simulation_time}.
 }
 \section{Warning}{
 
 Setting both \code{max_time_horizon} and \code{max_simulation_time} to
-\code{Inf} might be dengerous. In this case, the only stopping condition is a
+\code{Inf} might be dangerous. In this case, the only stopping condition is a
 ruin of the process, which might not happen.
 }
 

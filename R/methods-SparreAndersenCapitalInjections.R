@@ -71,7 +71,7 @@ setValidity(
 #' \code{SparreAndersenCapitalInjections} S4 class.
 #'
 #' The function constructs an object of a formal S4 class
-#' \code{SparreAndersenCapitalInjections}, a representation of an extenssion of
+#' \code{SparreAndersenCapitalInjections}, a representation of an extension of
 #' Sparre Andersen model that allows for positive jumps and defined as follows:
 #' \deqn{X_(t) = u + ct + \sum_{k=1}^{N^{(+)}(t)} Y^{(+)}_k -
 #' \sum_{i=1}^{N^{(-)}(t)} Y^{(-)}_i}
@@ -206,13 +206,13 @@ SparreAndersenCapitalInjections <- function(
 }
 
 
-#' Simulates a path of a Sparre Andersen model's extenssion with capital
+#' Simulates a path of a Sparre Andersen model's extension with capital
 #' injections
 #'
 #' \code{simulate_path()} simulates a path of
 #' \linkS4class{SparreAndersenCapitalInjections} model until one of the
 #' following conditions is met: (1) the process is ruined, (2)
-#' \code{max_time_horizon} is achieved, (3) the elapsed time of ths simulateion
+#' \code{max_time_horizon} is achieved, (3) the elapsed time of the simulation
 #' is greater than \code{max_simulation_time}.
 #'
 #' @param model an S4 object of \linkS4class{SparreAndersenCapitalInjections}
@@ -220,8 +220,8 @@ SparreAndersenCapitalInjections <- function(
 #' @param max_time_horizon a length one numeric vector specifying the maximum
 #' time horizon, until with the process will be simulated. Default: \code{Inf}.
 #' @param max_simulation_time a length one numeric vector indicating the maximum
-#' allowed time of simutaion. The value should be specified in seconds. Default:
-#' \code{Inf}.
+#' allowed time of simulation. The value should be specified in seconds.
+#' Default: \code{Inf}.
 #' @param seed an optional arbitrary length numeric vector specifying the seed.
 #' If provided, the \code{.Random.seed} in \code{.GlobalEnv} is set to its
 #' value.
@@ -230,7 +230,7 @@ SparreAndersenCapitalInjections <- function(
 #'
 #' @section Warning:
 #' Setting both \code{max_time_horizon} and \code{max_simulation_time} to
-#' \code{Inf} might be dengerous. In this case, the only stopping condition is a
+#' \code{Inf} might be dangerous. In this case, the only stopping condition is a
 #' ruin of the process, which might not happen.
 #'
 #' @examples

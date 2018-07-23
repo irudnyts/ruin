@@ -47,7 +47,7 @@ An object of \linkS4class{CramerLundbergCapitalInjections} class.
 }
 \details{
 The function constructs an object of a formal S4 class
-\code{CramerLundbergCapitalInjections}, a representation of an extenssion of
+\code{CramerLundbergCapitalInjections}, a representation of an extension of
 Cramer-Lundberg model that allows for positive jumps and defined as follows:
 \deqn{X_(t) = u + ct + \sum_{k=1}^{N^{(+)}(t)} Y^{(+)}_k -
 \sum_{i=1}^{N^{(-)}(t)} Y^{(-)}_i}

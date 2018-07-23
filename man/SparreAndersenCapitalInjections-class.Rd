@@ -5,7 +5,7 @@
 \alias{SparreAndersenCapitalInjections-class}
 \title{A formal S4 class SparreAndersenCapitalInjections}
 \description{
-A formal S4 class representation of Sparre Andersen's extenssion that
+A formal S4 class representation of Sparre Andersen's extension that
 includes capital injections.
 }
 \details{
