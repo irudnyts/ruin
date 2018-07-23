@@ -35,10 +35,10 @@ class.
 \details{
 The function constructs an object of a formal S4 class \code{CramerLundberg},
 that is a representation of classical risk procees defined as follows:
-\deqn{X(t) = u + ct - \sum_{i=1}^{N(t)} U_i,}
+\deqn{X(t) = u + ct - \sum_{i=1}^{N(t)} Y_i,}
 where \eqn{u} is the initial capital (\code{initial_capital}), \eqn{c} is the
 premium rate (\code{premium_rate}), \eqn{N(t)} is the Poisson process with
-intencity \eqn{\lambda} (\code{claim_poisson_arrival_rate}), \eqn{U_i} are
+intencity \eqn{\lambda} (\code{claim_poisson_arrival_rate}), \eqn{Y_i} are
 iid claim sizes (\code{claim_size_generator} and \code{claim_size_parameters}
 ).
 }

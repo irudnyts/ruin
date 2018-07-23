@@ -57,6 +57,63 @@ setValidity(
 
 )
 
+#' Constructs an object of CramerLundbergCapitalInjections S4 class
+#'
+#' \code{CramerLundbergCapitalInjections()} constructs an object of
+#' \code{CramerLundbergCapitalInjections} S4 class.
+#'
+#' The function constructs an object of a formal S4 class
+#' \code{CramerLundbergCapitalInjections}, that is a representation of an
+#' extenssion of Cramer-Lundberg model defined as follows:
+#' \deqn{X_(t) = u + ct + \sum_{k=1}^{N^{(+)}(t)} Y^{(+)}_k -
+#' \sum_{i=1}^{N^{(-)}(t)} Y^{(-)}_i}
+#' where \eqn{u} is the initial capital (\code{initial_capital}), \eqn{c} is the
+#' premium rate (\code{premium_rate}), \eqn{N^{(+)}(t)} is the Poisson process
+#' of positive jumps (capital injections) with intencity \eqn{\lambda^{(+)}}
+#' (\code{capital_injection_poisson_rate}), \eqn{Y^{(+)}_k} are
+#' iid capital injections' sizes (\code{capital_injection_size_generator}
+#' and \code{capital_injection_size_parameters}), \eqn{N^{(-)}(t)} is the
+#' Poisson process of negative jumps (claims) with intencity \eqn{\lambda^{(-)}}
+#' (\code{claim_poisson_arrival_rate}), \eqn{Y^{(-)}_i} are iid claim sizes
+#' (\code{claim_size_generator} and \code{claim_size_parameters}).
+#'
+#' @param initial_capital a length one numeric non-negative vector specifying an
+#' initial capital. Default: \code{0}.
+#' @param premium_rate a length one numeric non-negative vector specifying a
+#' premium rate. Default: \code{1}.
+#' @param claim_poisson_arrival_rate a length one numeric positive vector
+#' specifying the rate of the Poisson process of claims' arrivals. Default:
+#' \code{1}.
+#' @param claim_size_generator a function indicating the random generator of
+#' claims' sizes. Default: \code{rexp}.
+#' @param claim_size_parameters a named list containing parameters for the
+#' random generator of claims' sizes. Default: \code{list(rate = 1)}.
+#' @param capital_injection_poisson_rate a length one numeric positive vector
+#' specifying the rate of the Poisson process of capital injections' arrivals.
+#' Default: \code{1}.
+#' @param capital_injection_size_generator a function indicating the random
+#' generator of capital injections' sizes. Default: \code{rexp}.
+#' @param capital_injection_size_parameters a named list containing parameters
+#' for the random generator of capital injections' sizes. Default:
+#' \code{list(rate = 1)}.
+#'
+#' @return An object of \code{CramerLundbergCapitalInjections} class.
+#'
+#' @seealso \code{\link{CramerLundberg}},
+#' \code{\link{SparreAndersen}}, \code{link{SparreAndersenCapitalInjections}},
+#'
+#' @examples
+#' model <- CramerLundbergCapitalInjections(
+#'   initial_capital = 10,
+#'   premium_rate = 1,
+#'   claim_poisson_arrival_rate = 1,
+#'   claim_size_generator = rexp,
+#'   claim_size_parameters = list(rate = 1),
+#'   capital_injection_poisson_rate = 1,
+#'   capital_injection_size_generator = rexp,
+#'   capital_injection_size_parameters = list(rate = 1)
+#' )
+#'
 #' @export
 CramerLundbergCapitalInjections <- function(initial_capital = NULL,
                                             premium_rate = NULL,
