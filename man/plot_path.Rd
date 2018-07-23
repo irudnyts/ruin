@@ -7,7 +7,7 @@
 plot_path(path_object)
 }
 \arguments{
-\item{path_object}{an S4 object of *Path class (e.g.
+\item{path_object}{an S4 object of *Path class (e.g.,
 \code{\link{CramerLundbergPath}}).}
 }
 \value{

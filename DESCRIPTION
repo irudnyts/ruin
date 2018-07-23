@@ -22,7 +22,7 @@ BugReports: http://github.com/irudnyts/ruin/issues
 Depends:
     R (>= 3.4.3)
 Imports:
-    actuar (>= 2.3.0),
+    methods,
     parallel,
     ggplot2 (>= 2.2.1)
 Collate:
@@ -36,4 +36,6 @@ Collate:
     'ruin_probability.R'
     'zzz.R'
 RoxygenNote: 6.0.1
-Suggests: testthat
+Suggests:
+    testthat,
+    actuar (>= 2.3.0)
