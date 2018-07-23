@@ -47,8 +47,8 @@ An object of \code{CramerLundbergCapitalInjections} class.
 }
 \details{
 The function constructs an object of a formal S4 class
-\code{CramerLundbergCapitalInjections}, that is a representation of an
-extenssion of Cramer-Lundberg model defined as follows:
+\code{CramerLundbergCapitalInjections}, a representation of an extenssion of
+Cramer-Lundberg model that allows for positive jumps and defined as follows:
 \deqn{X_(t) = u + ct + \sum_{k=1}^{N^{(+)}(t)} Y^{(+)}_k -
 \sum_{i=1}^{N^{(-)}(t)} Y^{(-)}_i}
 where \eqn{u} is the initial capital (\code{initial_capital}), \eqn{c} is the
@@ -76,5 +76,5 @@ model <- CramerLundbergCapitalInjections(
 }
 \seealso{
 \code{\link{CramerLundberg}},
-\code{\link{SparreAndersen}}, \code{link{SparreAndersenCapitalInjections}},
+\code{\link{SparreAndersen}}, \code{link{SparreAndersenCapitalInjections}}.
 }

@@ -34,7 +34,7 @@ class.
 }
 \details{
 The function constructs an object of a formal S4 class \code{CramerLundberg},
-that is a representation of classical risk procees defined as follows:
+a representation of classical risk procees defined as follows:
 \deqn{X(t) = u + ct - \sum_{i=1}^{N(t)} Y_i,}
 where \eqn{u} is the initial capital (\code{initial_capital}), \eqn{c} is the
 premium rate (\code{premium_rate}), \eqn{N(t)} is the Poisson process with
@@ -52,5 +52,5 @@ model <- CramerLundberg(initial_capital = 10,
 }
 \seealso{
 \code{\link{CramerLundbergCapitalInjections}},
-\code{\link{SparreAndersen}}, \code{link{SparreAndersenCapitalInjections}},
+\code{\link{SparreAndersen}}, \code{link{SparreAndersenCapitalInjections}}.
 }
