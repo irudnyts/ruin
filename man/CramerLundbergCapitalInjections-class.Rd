@@ -14,11 +14,11 @@ The model is defined as follows:
 \sum_{i=1}^{N^{(-)}(t)} Y^{(-)}_i}
 where \eqn{u} is the initial capital (\code{initial_capital}), \eqn{c} is the
 premium rate (\code{premium_rate}), \eqn{N^{(+)}(t)} is the Poisson process
-of positive jumps (capital injections) with intencity \eqn{\lambda^{(+)}}
+of positive jumps (capital injections) with intensity \eqn{\lambda^{(+)}}
 (\code{capital_injection_poisson_rate}), \eqn{Y^{(+)}_k} are
 iid capital injections' sizes (\code{capital_injection_size_generator}
 and \code{capital_injection_size_parameters}), \eqn{N^{(-)}(t)} is the
-Poisson process of negative jumps (claims) with intencity \eqn{\lambda^{(-)}}
+Poisson process of negative jumps (claims) with intensity \eqn{\lambda^{(-)}}
 (\code{claim_poisson_arrival_rate}), \eqn{Y^{(-)}_i} are iid claim sizes
 (\code{claim_size_generator} and \code{claim_size_parameters}).
 
