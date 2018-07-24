@@ -16,11 +16,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-In the framework of risk theory, an insurance company is modeled as a stochastic process of its capital. Once the capital of such company falls below zero, the company is considered as bankrupt or ruined. Therefore, one of the key problem of the risk theory is to assess and estimate the probability of ruin. For many classical cases, the ruin probability can be derived explicitly, as a function of the model parameters. Usual, however, for more complex models the solution can be found only numerically, or even using simulation Monte-Carlo methods.
+In the framework of risk theory, an insurance company is modeled as a stochastic process of its capital. Once the capital of such company falls below zero, the company is considered as bankrupt or ruined. Therefore, one of the key problems of the risk theory is to assess and estimate the probability of ruin. For many classical cases, the ruin probability can be derived explicitly, as a function of the model parameters. Usually, however, for more complex models the solution can be found only numerically, or even using Monte-Carlo simulation methods.
 
-The package `ruin` is the first attempt to formally define various risk processes in R environment by using S4 object-oriented methodology. Each model is supposed to have its own simulator that allows to estimate the ruin probability. Current version includes only the simplest models, for most of which the ruin probabilities are known.
+The package `ruin` is the first attempt to formally define various risk processes in R environment by using S4 object-oriented methodology. Each model is supposed to have its own simulator that allows estimating the ruin probability. The current version includes only the simplest models, for most of which the ruin probabilities are known.
 
-This vignette propose a toy example of how to use the package. We consider a Cramér-Lundberg's extension that includes capital injections is defined as follows: 
+This vignette proposes a toy example of how to use the package. We consider a Cramér-Lundberg's extension that includes capital injections, which is defined as follows: 
 
 $$X(t) = u + ct + \sum_{i=1}^{N^{(+)}(t)} Y^{(+)}_i - \sum_{k=1}^{N^{(-)}(t)} Y^{(-)}_k,$$
 
@@ -55,7 +55,7 @@ model <- CramerLundbergCapitalInjections(
 
 The arguments' names of the constructor are self-explanatory: `initial_capital` defines the initial capital $u$, etc.
 
-A generic function `simulate_path()`, as can be guessed from its name, simulates one path of a given model: 
+A generic function `simulate_path()`, as can be guessed from its name, simulates one path of the given model: 
 
 ```{r, message=FALSE, warning=FALSE}
 one_path <- simulate_path(model = model, max_time_horizon = 10)
