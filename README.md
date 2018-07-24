@@ -15,8 +15,8 @@ risk processes in a framework of ruin theory. Each model is implemented
 as an S4 class, having a simulator of its path, and a plotting function.
 Further, a Monte-Carlo estimator of a ruin probability for a finite time
 is implemented, using a parallel computation. Currently, the package
-extends two classical risk models Cramer-Lundberg and Sparre Andersen
-models by including capital injections (positive jumps).
+extends two classical risk models, namely, Cramer-Lundberg and Sparre
+Andersen models by including capital injections (positive jumps).
 
 ## Installation
 
@@ -45,5 +45,5 @@ model <- CramerLundberg(
 ruin_probability(model = model, time_horizon = 10, return_paths = FALSE)
 #> $ruin_probability
 #> lower_bound    estimate upper_bound 
-#>  0.03720886  0.04110000  0.04499114
+#>  0.03692248  0.04080000  0.04467752
 ```
