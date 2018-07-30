@@ -8,8 +8,12 @@
 
 0 errors | 0 warnings | 0 notes
 
-First submission.
 
 ## Downstream dependencies
 
 There are currently no downstream dependencies for this package.
+
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Add doi refenrence to DESCRIPTION

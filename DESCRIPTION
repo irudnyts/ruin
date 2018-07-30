@@ -11,9 +11,11 @@ Description: A (not yet exhaustive) collection of common models of risk
     a Monte-Carlo estimator of a ruin probability for a finite time is
     implemented, using a parallel computation. Currently, the package extends
     two classical risk models Cramer-Lundberg and Sparre Andersen models by
-    including capital injections (positive jumps). The intent of the package is
-    to provide a user-friendly interface for ruin processes' simulators, as well
-    as a solid and extensible structure for future extensions.
+    including capital injections, that are positive jumps (see Breuer L. and
+    Badescu A.L. (2014) <doi:10.1080/03461238.2011.636969>). The intent of the
+    package is to provide a user-friendly interface for ruin processes'
+    simulators, as well as a solid and extensible structure for future
+    extensions.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
